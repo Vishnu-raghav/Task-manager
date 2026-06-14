@@ -60,7 +60,6 @@ export function renderTaskList() {
 
 >
   
-  <!-- LEFT TEXT -->
   <div class="task-list-content">
     <span 
      class="task-list-title"
@@ -130,24 +129,22 @@ function showDetails(id) {
 
   const detailContainer = document.querySelector(".task-detail-container");
 
-    if (!id) {
-    detailContainer.innerHTML = `
+  const todo = getTodos().find(t => t.id === id);
+
+  if(!todo){
+   detailContainer.innerHTML = `
       <div class="empty-state">
         <i class="fa-regular fa-folder-open"></i>
         <p>Select a task to view details</p>
       </div>
     `;
     return;
-  }
-  const todo = getTodos().find(t => t.id === id);
+}
 
   const categories = getCategories()
   const categoryObj = categories.find((cat) => cat.id == todo.category) 
 
 
-  if (!todo) return;
-
-  
 
 
   detailContainer.innerHTML = `

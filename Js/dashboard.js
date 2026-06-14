@@ -1,9 +1,15 @@
 import { rerenderPage } from "./app.js";
-import { getPriorities, getTodos, saveTodos } from "./storage.js";
+import { 
+  getPriorities,
+  getTodos,
+  saveTodos,
+  getCategories,
+  initializePriorities
+} from "./storage.js";
+
 import { openEditTask, clearEditState, getEditState } from "./taskActions.js";
 import {initForm,updateSubmitButtonState} from "./formUtils.js"
 import {openConfirmModal} from "./actionsConfirm.js"
-import { getCategories, initializePriorities, getPriorities} from "./storage.js";
 
 import {
   createTodo as createTodoService,
@@ -11,7 +17,10 @@ import {
   deleteTodo as deleteTodoService
 } from "./taskcrud.js";
 
-import {populateOptions as populateCategoryOptions,  populateCustomDropdown} from "../utils/populateOptions.js"
+import {
+  populateOptions as populateCategoryOptions,
+  populateCustomDropdown
+} from "../utils/populateOptions.js"
 
 
 const form = document.getElementById("todoForm");
