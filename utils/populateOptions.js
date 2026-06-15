@@ -23,8 +23,20 @@ export function populateOptions(selectElement, data, config = {} ){
 
 }
 
-export function populateCustomDropdown(container, data){
+export function populateCustomDropdown(selectedElement,container, data){
+    selectedElement.innerHTML = ""
+
     container.innerHTML = ""
+
+    const placeholder = document.createElement("div")
+    placeholder.textContent = "vishnu"
+
+    placeholder.hidden = 
+    placeholder.selected = false
+
+    selectedElement.appendChild(placeholder)
+
+    
 
     data.forEach(item => {
         const div = document.createElement("div")

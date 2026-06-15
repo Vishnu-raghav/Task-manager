@@ -20,6 +20,8 @@ const modalHeading = todoModal.querySelector(".modal-header h4");
 const modalSubmitBtn = todoModal.querySelector('button[type="submit"]');
 const select = document.getElementById("task-category");
 const priorityContainer = document.getElementById("task-priority") 
+const prioritySelect = document.querySelector(".dropdown-selected")
+
 
 
 
@@ -27,7 +29,7 @@ populateCategoryOptions(select , getCategories(), {
   placeholderText: "Select Category"
 });
 
-populateCustomDropdown(priorityContainer, getPriorities())
+populateCustomDropdown(prioritySelect,priorityContainer, getPriorities())
 
 
 

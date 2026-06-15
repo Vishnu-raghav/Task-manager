@@ -1,11 +1,13 @@
 import "./sidebar.js";
 
+
 rerenderPage();
 
 export function rerenderPage() {
   const page = document.body.dataset.page;
   if (page === "dashboard" || page === "myTask") {
   import("./modal.js");
+  import("./priority.js")
 }
   if (page === "dashboard") {
     import("./dashboard.js").then(m => {

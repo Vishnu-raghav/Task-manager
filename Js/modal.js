@@ -69,30 +69,30 @@ function showImage(file){
 }
 
 
-const dropdown = document.querySelector(".custom-dropdown");
-const options = document.querySelector(".dropdown-options");
-const selected = dropdown.querySelector(".dropdown-selected");
+// const dropdown = document.querySelector(".custom-dropdown");
+// const options = document.querySelector(".dropdown-options");
+// const selected = dropdown.querySelector(".dropdown-selected");
 
-dropdown.addEventListener("click", (e) => {
-  dropdown.classList.toggle("active");
-});
+// dropdown.addEventListener("click", (e) => {
+//   dropdown.classList.toggle("active");
+// });
 
-options.addEventListener("click", (e) => {
-  const item = e.target.closest(".dropdown-item");
-  if (!item) return;
+// options.addEventListener("click", (e) => {
+//   const item = e.target.closest(".dropdown-item");
+//   if (!item) return;
 
-  const value = item.querySelector("span").innerText;
-  selected.innerText = value;
+//   const value = item.querySelector("span").innerText;
+//   selected.innerText = value;
 
-  const id = item.dataset.id;
+//   const id = item.dataset.id;
 
-  dropdown.dataset.value = id
+//   dropdown.dataset.value = id
 
-  dropdown.classList.remove("active");
-});
+//   dropdown.classList.remove("active");
+// });
 
-document.addEventListener("click", (e) => {
-  if (!dropdown.contains(e.target)) {
-    dropdown.classList.remove("active");
-  }
-});
+// document.addEventListener("click", (e) => {
+//   if (!dropdown.contains(e.target)) {
+//     dropdown.classList.remove("active");
+//   }
+// });
