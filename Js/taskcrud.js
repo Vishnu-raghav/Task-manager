@@ -120,6 +120,7 @@ export function createPriority(data){
 
   const newPriority = {
     id : Date.now(),
+    color: data.color || "#6b7280",
     ...data,
     isDefault: false,
   }

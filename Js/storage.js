@@ -30,8 +30,8 @@ const defaultCategories = [
 ];
 
 const defaultPriorities = [
-  {id : 1, name: "High", isDefault: true},
-  {id : 3, name: "Low", isDefault: true},
+  {id : 1, name: "High", color : "#ef4444",isDefault: true},
+  {id : 3, name: "Low", color: "#22c55e",isDefault: true},
 ]
 
 export function initializeCategories() {

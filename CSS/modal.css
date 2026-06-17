@@ -233,6 +233,16 @@
 .yellow{
   background: #facc15;
 }
+
+.purple{
+  background-color: purple;
+}
+
+.Gray{
+  background-color: gray;
+}
+
+
 .priority-delete-btn{
   width: 100%;
 

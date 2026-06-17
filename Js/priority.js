@@ -127,28 +127,34 @@ export function populateCustomDropdown(selectedElement,container, data){
             ``}
             
 
-
-        
 <div class="priority-colors">
 
-  <div class="color-option">
+  <div class="color-option", data-color="#ef4444 ">
     <span class="color-box red"></span>
     <span>Red</span>
   </div>
 
-  <div class="color-option">
+  <div class="color-option", data-color="#22c55e">
     <span class="color-box green"></span>
     <span>Green</span>
   </div>
 
-  <div class="color-option">
+  <div class="color-option", data-color="#3b82f6">
     <span class="color-box blue"></span>
     <span>Blue</span>
   </div>
 
-  <div class="color-option">
+  <div class="color-option", data-color="#facc15" d>
     <span class="color-box yellow"></span>
     <span>Yellow</span>
+  </div>
+  <div class="color-option", data-color="#a855f7" d>
+    <span class="color-box purple"></span>
+    <span>purple</span>
+  </div>
+  <div class="color-option", data-color="#6b7280" d>
+    <span class="color-box Gray"></span>
+    <span>Gray</span>
   </div>
 
 </div>
