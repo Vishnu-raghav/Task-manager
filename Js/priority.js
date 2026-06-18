@@ -92,11 +92,10 @@ priorityContainer.addEventListener("click", (e) => {
 
 
 export function populateCustomDropdown(selectedElement,container, data){
-    selectedElement.innerHTML = ""
 
     container.innerHTML = ""
 
-    selected.textContent = "Select Priority";
+    // selectedElement.textContent = "Select Priority";
     
     data.forEach(item => {
         const div = document.createElement("div")
