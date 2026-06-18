@@ -21,14 +21,13 @@ const modalHeading = todoModal.querySelector(".modal-header h4");
 const modalSubmitBtn = todoModal.querySelector('button[type="submit"]');
 const select = document.getElementById("task-category");
 const priorityContainer = document.getElementById("task-priority") 
-const prioritySelect = document.querySelector(".dropdown-selected")
 
 
 populateCategoryOptions(select , getCategories(), {
   placeholderText: "Select Category"
 });
 
-populateCustomDropdown(prioritySelect,priorityContainer, getPriorities())
+populateCustomDropdown(priorityContainer, getPriorities())
 
 
 export function renderTaskList() {
@@ -52,13 +51,12 @@ export function renderTaskList() {
     const priorityObj = priority.find((p) => p.id === Number(task.priority)) 
 
     const div = document.createElement("div");
-    div.className = "todo-card";
+    div.className = "task-list-item";
     div.dataset.id = task.id;
     div.innerHTML = `
-<div 
-   class="task-list-card"
 
->
+
+     <div class="task-list-header">
   
   <div class="task-list-content">
     <span 
@@ -95,34 +93,43 @@ export function renderTaskList() {
   }
 
 </div>
+ <div class="task-meta">
 
-<div 
-
->
-  <span>
+  <span class="meta-item">
     Category:
-    <b style="color:#222;">${categoryObj ? categoryObj.name : "General"}</b>
+    <b>${categoryObj ? categoryObj.name : "General"}</b>
   </span>
 
-  <span>
+  <span class="meta-item">
     Priority:
-    <b style="color:#ff7a7a;">${priorityObj ? priorityObj.name : "N/A"}</b>
+    <span
+      class="priority-pill"
+      style="
+        background:${priorityObj?.color || '#6b7280'};
+        color:white;
+      "
+    >
+      ${priorityObj?.name || "N/A"}
+    </span>
   </span>
 
-  <span>
+  <span class="meta-item">
     Status:
-    <b style="color:#666;">In progress</b>
+    <b>In progress</b>
   </span>
 
-  <span>
+  <span class="meta-item">
     Due:
-    <b style="color:#222;">${task.dueDate || "N/A"}</b>
+    <b>${task.dueDate || "N/A"}</b>
   </span>
+
+</div>
 </div>
     `
     listSection.appendChild(div);
   });
-    showDetails(); 
+
+  showDetails(); 
 }
 
 function showDetails(id) {
@@ -130,6 +137,7 @@ function showDetails(id) {
   const detailContainer = document.querySelector(".task-detail-container");
 
   const todo = getTodos().find(t => t.id === id);
+  const priority = getPriorities()
 
   if(!todo){
    detailContainer.innerHTML = `
@@ -143,6 +151,9 @@ function showDetails(id) {
 
   const categories = getCategories()
   const categoryObj = categories.find((cat) => cat.id == todo.category) 
+
+  const priorityObj = priority.find((p) => p.id === Number(todo.priority)) 
+
 
   detailContainer.innerHTML = `
   <div class="todo-detail">
@@ -162,7 +173,15 @@ function showDetails(id) {
       <h2 class="task-title">${todo.title}</h2>
 
       <div class="meta">
-        <span class="badge priority extreme">${todo.priority}</span>
+        <span
+  class="priority-pill"
+  style="
+    background:${priorityObj?.color || "#6b7280"};
+    color:white;
+  "
+>
+  ${priorityObj?.name || "N/A"}
+</span>
         <span class="badge status pending">Not Started</span>
       </div>
 
@@ -234,7 +253,7 @@ function editTodoHandle(editBtn){
 }
 
 listSection.addEventListener("click", (e) => {
-  const card = e.target.closest(".todo-card");
+  const card = e.target.closest(".task-list-item");
   if (!card) return;
 
   const id = Number(card.dataset.id);
