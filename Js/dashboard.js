@@ -132,8 +132,6 @@ export function renderTodos() {
 export function renderCompletedTodos() {
   if (!completedTaskSection) return;
 
-
-
   completedTaskSection.innerHTML = "";
 
   const todos = getTodos();
@@ -184,23 +182,6 @@ export function renderCompletedTodos() {
           <div class="img-card">
             <img class="task-img" src="${task.image}" alt="img">
           </div>` : ""}
-      </div>
-
-      <div class="task-Progress">
-        <p class="progress-key">Category: <span class="progress-value">${categoryName || "General"}</span></p>
-<p class="progress-key">
-  Priority:
-  <span
-    class="progress-value priority-pill"
-    style="
-      background:${priorityObj?.color || '#6b7280'};
-      color:white;
-    "
-  >
-    ${priorityName}
-  </span>
-</p>        <p class="progress-key">Status: <span class="progress-value">Completed</span></p>
-        <p class="progress-key">Due: <span class="progress-value">${task.dueDate || "N/A"}</span></p>
       </div>
     `;
 

@@ -74,15 +74,14 @@ body[data-page="dashboard"] .grid-right-area{
   position: relative;
 }
 
+.task-card-section .todo-card{
+  min-height: 180px;
+}
+
 .todo-card:hover{
   transform: translateY(-6px);
   box-shadow: 0 12px 30px rgba(0,0,0,0.1);
 }
-
-
-
-
-
 
 .card-header{
   display: flex;
@@ -145,7 +144,7 @@ background-color: rgb(234, 228, 228);
 }
 
 .task-details span{
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #222;
   display: -webkit-box;
@@ -161,20 +160,19 @@ background-color: rgb(234, 228, 228);
   margin-top: 6px;
   overflow-wrap: anywhere;
   display: -webkit-box;
-  -webkit-line-clamp: 3;  
+  -webkit-line-clamp: 2;  
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 
 .img-card{
-  width: 180px;
-  height: 120px;
-  flex-shrink: 0;
-  border-radius: 14px;
-  overflow: hidden;
-  background: #f1f1f1;
+  width: 120px;
+  height: 80px;
 
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .task-img{
@@ -186,15 +184,15 @@ background-color: rgb(234, 228, 228);
 
 .task-Progress{
   display: flex;
-  gap: 10px;
+  gap: 6px;
   flex-wrap: wrap;
   margin-left: 34px;
 }
 
 .progress-key{
-  font-size: 12px;
   background: #f5f6fa;
-  padding: 6px 10px;
+  padding: 4px 8px;
+  font-size: 11px;
   border-radius: 8px;
 }
 
@@ -224,9 +222,10 @@ background-color: rgb(234, 228, 228);
   flex: 1; 
   overflow-y: auto;  
   border-radius: 16px;
-  padding: 14px;
+  padding: 10px;
   background: #fff;
   border: 1px solid #eee;
+  min-height: 120px;
 }
 
 .complete-tasks-section::-webkit-scrollbar{
@@ -244,28 +243,65 @@ background-color: rgb(234, 228, 228);
   cursor: pointer;
 }
 
-
 .complete-tasks-section .todo-card{
-  padding: 12px;
+  padding: 10px 12px;
   border-radius: 12px;
   margin-bottom: 10px;
+  min-height: 0;
+  border-left: 4px solid #22c55e;
+
+  background: #fafafa;
+ 
+  transition: .2s ease;
+}
+
+.complete-tasks-section .todo-card:hover{
+  transform: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+}
+
+.complete-tasks-section .task-card{
+  gap: 10px;
+  margin-bottom: 0;
+  align-items: center;
 }
 
 .complete-tasks-section .task-details span{
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 600;
+
+  text-decoration: line-through;
+
+  color: #6b7280;
 }
 
 .complete-tasks-section .task-details p{
-  -webkit-line-clamp: 2;
+  font-size: 12px;
+  color: #9ca3af;
+
+  -webkit-line-clamp: 1;
 }
 
 .complete-tasks-section-header{
   display: flex;
   align-items: center;
   gap: 8px;
-  font-weight: 600;
-  margin-top: 8px;
+
+  padding-bottom: 10px;
+  margin-bottom: 4px;
+
+  border-bottom: 1px solid #eee;
+
+  font-size: 15px;
+  font-weight: 700;
 }
+
+
+.complete-tasks-section .img-card{
+  width: 50px;
+  height: 50px;
+}
+
 
 @media (max-width: 700px){
 

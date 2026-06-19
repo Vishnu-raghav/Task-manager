@@ -27,9 +27,6 @@ export function renderCategories() {
   category.forEach(cat => {
      if (!cat || cat.id == null) return; 
 
-    
-
-
     const tasks = todos.filter(t => t.category == cat.id);
     const total = tasks.length;
     const completed = tasks.filter(t => t.completed).length;
@@ -38,8 +35,6 @@ export function renderCategories() {
     const lastTask = tasks.length
       ? tasks[tasks.length - 1].dueDate || "N/A"
       : "No tasks"; 
-
-
 
     const card = document.createElement("div");
     card.className = "category-card";
@@ -50,7 +45,6 @@ export function renderCategories() {
      <div class="category-header">
        <h3>${cat.name}</h3>
      </div>
-
 
       <p>${total} Tasks</p>
       <p>${completed} Completed</p>
@@ -74,8 +68,7 @@ export function renderCategories() {
 </div>
 ` : ""}
     `;
-  
- 
+
     categorySection.appendChild(card);
     
   });
@@ -254,11 +247,9 @@ closeBtn.addEventListener("click", () => {
     todoModal.classList.remove("active");
 })
 
-
 form.addEventListener("input",() => {
   updateSubmitButtonState(form,modalSubmitBtn)
 })
-
 
 initForm(form, {
   createFn: createCategory,
