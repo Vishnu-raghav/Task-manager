@@ -60,6 +60,7 @@ export function renderTodos() {
         <p>No tasks Click "Add Task" to get started</p>
       </div>
     `;
+    updateProgressUI();
     return;
   }
 
@@ -222,15 +223,33 @@ function updateProgressUI() {
   const completed = todos.filter(t => t.completed).length;
   const pending = total - completed;
 
-  const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+  const percent = total === 0
+    ? 0
+    : Math.round((completed / total) * 100);
 
-  // update UI
-  document.querySelector(".progress-percent").innerText = percent + "%";
-  document.querySelector(".progress-bar-fill").style.width = percent + "%";
+  document.querySelector(".progress-percent").innerText = `${percent}%`;
+
+  const progressFill = document.querySelector(".progress-bar-fill");
+  progressFill.style.width = `${percent}%`;
 
   const stats = document.querySelectorAll(".stat-value");
   stats[0].innerText = completed;
   stats[1].innerText = pending;
+
+  const labels = document.querySelectorAll(".stat-label");
+  labels[0].innerText = "Completed";
+  labels[1].innerText = "Pending";
+
+
+  if (total === 0) {
+  document.querySelector(".progress-percent").innerText = "0%";
+  progressFill.style.width = "0%";
+
+  stats[0].innerText = 0;
+  stats[1].innerText = 0;
+
+  return;
+}
 }
 
 addTaskBtn.addEventListener("click", () => {
