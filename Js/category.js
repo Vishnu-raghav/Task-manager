@@ -125,7 +125,9 @@ function showCategoryTasks(categoryID) {
   </div>
 
   <div class="category-tasks-container"></div>
+
   `;
+
   const container = rightPanel.querySelector(".category-tasks-container");
 
   filtered.forEach(task => {
@@ -173,10 +175,9 @@ function showCategoryTasks(categoryID) {
   });
 }
 
-function handleDeleteCategory(deleteBtn){
+function handleDeleteCategory(id){
   
-  const id = Number(deleteBtn.dataset.id);  
-
+if(Number.isNaN(id)) return
 
   openConfirmModal("Delete this category?", () => {
     deleteCategory(id);
@@ -191,8 +192,9 @@ function handleDeleteCategory(deleteBtn){
   });
 }
 
-function handleEditCategory(editBtn){
-  const id = Number(editBtn.dataset.id);
+function handleEditCategory(id){
+  
+  if(Number.isNaN(id)) return
 
   openEditCategory(id, {
   form,
@@ -203,35 +205,38 @@ function handleEditCategory(editBtn){
 }
 
 categorySection.addEventListener("click", (e) => {
+  const deleteBtn = e.target.closest(".delete-btn");
+  if (deleteBtn) {
+    const card = deleteBtn.closest(".category-card");
+    if (!card) return;
+
+    const id = Number(card.dataset.id);
+    handleDeleteCategory(id);
+    return;
+  }
+
+  const editBtn = e.target.closest(".edit-btn");
+  if (editBtn) {
+    const card = editBtn.closest(".category-card");
+    if (!card) return;
+
+    const id = Number(card.dataset.id);
+    handleEditCategory(id);
+    return;
+  }
+
   const card = e.target.closest(".category-card");
   if (!card) return;
 
-   document.querySelectorAll(".category-card").forEach(c => {
+  document.querySelectorAll(".category-card").forEach(c => {
     c.classList.remove("active");
   });
 
   card.classList.add("active");
 
   const categoryID = card.dataset.id;
-  activeCategoryId = categoryID; 
+  activeCategoryId = categoryID;
   showCategoryTasks(categoryID);
-});
-
-
-categorySection.addEventListener("click", (e) => {
-
-  const deleteBtn = e.target.closest(".delete-btn");
-  if(deleteBtn){
-    handleDeleteCategory(deleteBtn);
-    return;
-  }
-
-  const editBtn = e.target.closest(".edit-btn");
-  if(editBtn){
-    handleEditCategory(editBtn);
-    return;
-  }
-
 });
 
 createCategoryButton.addEventListener("click", () => {
