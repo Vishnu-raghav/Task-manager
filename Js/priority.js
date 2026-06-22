@@ -51,21 +51,21 @@ priorityContainer.addEventListener("click", (e) => {
     if(!success) return
 
     isAddingPriority = false;
-    renderAddPriority();
+    renderPriorityInputSection();
     return;
   }
 
   const cancelBtn = e.target.closest(".cancel-priority");
   if (cancelBtn) {
     isAddingPriority = false;
-    renderAddPriority();
+    renderPriorityInputSection();
     return;
   }
 
   const addBtn = e.target.closest(".add-priority-btn");
   if (addBtn) {
     isAddingPriority = true;
-    renderAddPriority();
+    renderPriorityInputSection();
     return;
   }
 
@@ -186,10 +186,9 @@ function resetPriorityDropdown() {
   dropdown.dataset.value = "";
 }
 
-function renderAddPriority() {
+function renderPriorityInputSection() {
 
-  const addNewContainer =
-    document.querySelector(".add-new");
+  const addNewContainer = document.querySelector(".add-new");
 
   if (isAddingPriority) {
 
@@ -220,6 +219,7 @@ function renderAddPriority() {
     </button>
   </div>
 `;
+
   const input = addNewContainer.querySelector(".priority-input");
   const error = addNewContainer.querySelector(".priority-error");
 
