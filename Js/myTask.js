@@ -10,7 +10,6 @@ import {
 } from "./taskcrud.js";
 
 import {populateOptions as populateCategoryOptions} from "../utils/populateOptions.js"
-// import { populateCustomDropdown,resetPriorityDropdown } from "./priority.js";
 
 const rightPanel = document.querySelector(".grid-right-area");
 const listSection = document.querySelector(".task-card-section");
@@ -20,8 +19,8 @@ const todoModal = document.getElementById("todoModal");
 const modalHeading = todoModal.querySelector(".modal-header h4");
 const modalSubmitBtn = todoModal.querySelector('button[type="submit"]');
 const select = document.getElementById("task-category");
-const priorityContainer = document.getElementById("task-priority") 
 
+let activeTaskId = null;
 
 populateCategoryOptions(select , getCategories(), {
   placeholderText: "Select Category"
@@ -48,7 +47,8 @@ export function renderTaskList() {
   todos.forEach(task => {
     const categoryObj = category.find((cat) => cat.id === Number(task.category))
     const priorityObj = priority.find((p) => p.id === Number(task.priority)) 
-
+    const statusText = task.completed ? "Completed" : "In progress";
+    
     const div = document.createElement("div");
     div.className = "task-list-item";
     div.dataset.id = task.id;
@@ -114,7 +114,7 @@ export function renderTaskList() {
 
   <span class="meta-item">
     Status:
-    <b>In progress</b>
+    <b>${statusText}</b>
   </span>
 
   <span class="meta-item">
@@ -128,14 +128,19 @@ export function renderTaskList() {
     listSection.appendChild(div);
   });
 
-  showDetails(); 
+  if (activeTaskId !== null) {
+    showDetails(activeTaskId);
+  } else {
+    showDetails();
+  }
 }
 
 function showDetails(id) {
 
-  const detailContainer = document.querySelector(".task-detail-container");
+  const detailContainer = document.querySelector(".task-detail-container")
+  if (!detailContainer) return;
 
-  const todo = getTodos().find(t => t.id === id);
+  const todo = getTodos().find(t => t.id === id)
   const priority = getPriorities()
 
   if(!todo){
@@ -144,12 +149,14 @@ function showDetails(id) {
         <i class="fa-regular fa-folder-open"></i>
         <p>Select a task to view details</p>
       </div>
-    `;
-    return;
+    `
+
+    return
 }
 
   const categories = getCategories()
   const categoryObj = categories.find((cat) => cat.id == todo.category) 
+  const statusText = todo.completed ? "Completed" : "In progress";
 
   const priorityObj = priority.find((p) => p.id === Number(todo.priority)) 
 
@@ -181,12 +188,12 @@ function showDetails(id) {
 >
   ${priorityObj?.name || "N/A"}
 </span>
-        <span class="badge status pending">Not Started</span>
+        <span class="badge status pending">${statusText}</span>
       </div>
 
       <p class="date">
         <i class="fa-regular fa-calendar"></i>
-        Created on <span>${todo.dueDate}</span>
+        Due on <span>${todo.dueDate}</span>
       </p>
     </div>
   </div>
@@ -227,21 +234,25 @@ function showDetails(id) {
 
 }
 
-function deleteTodoHandle(deleteBtn) {
-  const id = Number(deleteBtn.dataset.id);
+function deleteTodoHandle(id) {
+
+  if(Number.isNaN(id)) return
 
    openConfirmModal("Are you sure you want to delete this task?", () => {
-    deleteTodoService(id);
+   deleteTodoService(id)
 
-    renderTaskList();
-    showDetails(); 
+    if (activeTaskId === id) {
+      activeTaskId = null
+    }
 
+    renderTaskList()
+    
   });
 }
 
-function editTodoHandle(editBtn){
+function editTodoHandle(id){
 
-  const id = Number(editBtn.dataset.id)
+  if(Number.isNaN(id)) return
 
   openEditTask(id, {
   form,
@@ -256,20 +267,24 @@ listSection.addEventListener("click", (e) => {
   if (!card) return;
 
   const id = Number(card.dataset.id);
+  activeTaskId = id;
   showDetails(id);
 });
 
 rightPanel.addEventListener("click", (e) => {
   const deleteBtn = e.target.closest(".delete-btn");
-
+  
   if(deleteBtn){
-    deleteTodoHandle(deleteBtn);
+    const id = Number(deleteBtn.dataset.id)
+    deleteTodoHandle(id);
+    return
   }
 
   const editBtn = e.target.closest(".edit-btn")
-  
-  if(editBtn){
-    editTodoHandle(editBtn)
+   if(editBtn){
+    const id = Number(editBtn.dataset.id)
+    editTodoHandle(id)
+    return
   }
 
 });

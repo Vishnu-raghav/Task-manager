@@ -31,7 +31,6 @@ const todoModal = document.getElementById("todoModal");
 const modalHeading = todoModal.querySelector(".modal-header h4");
 const modalSubmitBtn = todoModal.querySelector('button[type="submit"]');
 const select = document.getElementById("task-category");
-const priorityContainer = document.getElementById("task-priority") 
 
 
 initializePriorities()
@@ -62,6 +61,7 @@ export function renderTodos() {
 
   todos.forEach(task => {
     if (task.completed) return; 
+
 
     const categoryObj = categories.find(c => c.id === Number(task.category));
     const categoryName = categoryObj ? categoryObj.name : "General";
@@ -115,7 +115,7 @@ export function renderTodos() {
            ${priorityName}
          </span>
         </p>
-        <p class="progress-key">Status: <span class="progress-value">in progress</span></p>
+        <p class="progress-key">Status: <span class="progress-value">${task.completed ? `Complete` : `In progress`}</span></p>
         <p class="progress-key">Due: <span class="progress-value">${task.dueDate || "N/A"}</span></p>
       </div>
     `;
@@ -186,10 +186,9 @@ export function renderCompletedTodos() {
   });
 }
 
-export function deleteTodoHandle(deleteBtn){
+export function deleteTodoHandle(id){
 
- const card = deleteBtn.closest(".todo-card")
- const id = Number(card.dataset.id)
+  if(Number.isNaN(id)) return
 
  openConfirmModal("Are you sure you want to delete this task?", () => {
  deleteTodoService(id)
@@ -198,10 +197,10 @@ export function deleteTodoHandle(deleteBtn){
 
 }
 
- export function editTodoHandle(editBtn){
+ export function editTodoHandle(id){
 
-  const card = editBtn.closest(".todo-card")
-  const id = Number(card.dataset.id)
+  if(Number.isNaN(id)) return
+
 
   openEditTask(id, {
   form,
@@ -273,15 +272,34 @@ todoCardContainer.addEventListener("click", (e) => {
   const deleteBtn = e.target.closest(".delete")
   
   if(deleteBtn){
-    deleteTodoHandle(deleteBtn)
+    const card = deleteBtn.closest(".todo-card")
+    if(!card) return
+
+    const id = Number(card.dataset.id)
+    deleteTodoHandle(id)
     return
   }
   
   const editBtn = e.target.closest(".edit");
   if (editBtn){
-    editTodoHandle(editBtn)
+    const card = editBtn.closest(".todo-card")
+    if(!card) return
+
+    const id = Number(card.dataset.id)
+    editTodoHandle(id)
     return
   }
+
+  const actions = e.target.closest(".actions");
+  if (actions) {
+  const popup = actions.querySelector(".card-popup");
+  if(!popup) return
+
+  popup.classList.toggle("active");
+  return
+  }
+  
+  
   
 });
 
@@ -301,15 +319,6 @@ todoCardContainer.addEventListener("change", (e) => {
   
   saveTodos(todos);
   rerenderPage()
-});
-
-
-todoCardContainer.addEventListener("click", (e) => {
-  const actions = e.target.closest(".actions");
-  if (!actions) return;
-  
-  const popup = actions.querySelector(".card-popup");
-  popup.classList.toggle("active");
 });
 
 
