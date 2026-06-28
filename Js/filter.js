@@ -52,17 +52,35 @@ taskFilterContainer.addEventListener("click", (e) => {
 });
 
 taskFilterContainer.addEventListener("change", (e) => {
-  const input = e.target.closest('input[type="checkbox"]');
-  if (!input) return;
-
-  const filterOption = input.closest(".task-filter-check");
+  const checkbox  = e.target.closest('input[type="checkbox"]');
+  if (checkbox ){
+  const filterOption = checkbox.closest(".task-filter-check");
   if (!filterOption) return;
-
+  
   const id = Number(filterOption.dataset.id);
   const type = filterOption.dataset.filterType;
-  const checked = input.checked;
+  const checked = checkbox.checked;
 
   updateMultiSelectFilters(id, type, checked);
+  return
+  }
+
+  const radio = e.target.closest('input[type="radio"]')
+  if(radio){
+    console.log(radio)
+    const filterOption = radio.closest(".task-filter-chip")
+    console.log(filterOption)
+    if(!filterOption) return
+
+    const type = filterOption.dataset.filterType
+    const value = radio.value
+
+    updateSingleSelectFilters(type, value)
+
+    return
+  }
+
+
 });
 
 function populateCategoryAndPriorityInFilterOptions() {
@@ -134,11 +152,25 @@ function updateMultiSelectFilters(id, type, checked) {
 
 }
 
+
+
+
+function updateSingleSelectFilters(type, value){
+
+  if(type === "status"){
+    
+  }
+
+}
+
 export function filterTodos(todos, selectedFilters) {
+    
 
   if (
     selectedFilters.categories.length === 0 &&
-    selectedFilters.priorities.length === 0
+    selectedFilters.priorities.length === 0 &&
+    selectedFilters.status === "All" && 
+    selectedFilters.dueDate === "All"
   ) {
     return todos;
   }
@@ -153,7 +185,13 @@ export function filterTodos(todos, selectedFilters) {
       selectedFilters.priorities.length === 0 ||
       selectedFilters.priorities.includes(Number(todo.priority));
 
-    return categoryPass && priorityPass;
+    const statusPass = 
+      selectedFilters.status === "All" ||
+      selectedFilters.status.includes(todo.completed)
+
+
+
+    return categoryPass && priorityPass && statusPass
   });
 }
 

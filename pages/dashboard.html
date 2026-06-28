@@ -140,17 +140,17 @@
         </div>
 
         <div class="task-filter-chip-list task-filter-chip-list--single" data-filter-group="status">
-          <label class="task-filter-chip">
+          <label class="task-filter-chip" data-filter-type="status">
             <input type="radio" name="taskStatus" value="all" checked />
             <span>All</span>
           </label>
 
-          <label class="task-filter-chip">
+          <label class="task-filter-chip" data-filter-type="status">
             <input type="radio" name="taskStatus" value="active" />
             <span>Active</span>
           </label>
 
-          <label class="task-filter-chip">
+          <label class="task-filter-chip" data-filter-type="status">
             <input type="radio" name="taskStatus" value="completed" />
             <span>Completed</span>
           </label>
@@ -165,29 +165,24 @@
         </div>
 
         <div class="task-filter-chip-list task-filter-chip-list--single" data-filter-group="dueDate">
-          <label class="task-filter-chip">
+          <label class="task-filter-chip" data-filter-type="dueDate">
             <input type="radio" name="taskDueDate" value="all" checked />
             <span>All Dates</span>
           </label>
 
-          <label class="task-filter-chip">
+          <label class="task-filter-chip" data-filter-type="dueDate">
             <input type="radio" name="taskDueDate" value="today" />
             <span>Due Today</span>
           </label>
 
-          <label class="task-filter-chip">
+          <label class="task-filter-chip" data-filter-type="dueDate">
             <input type="radio" name="taskDueDate" value="week" />
             <span>This Week</span>
           </label>
 
-          <label class="task-filter-chip">
+          <label class="task-filter-chip" data-filter-type="dueDate">
             <input type="radio" name="taskDueDate" value="overdue" />
             <span>Overdue</span>
-          </label>
-
-          <label class="task-filter-chip">
-            <input type="radio" name="taskDueDate" value="none" />
-            <span>No Due Date</span>
           </label>
         </div>
       </section>

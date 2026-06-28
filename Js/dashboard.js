@@ -48,15 +48,6 @@ const selectedFilters = getFilterState();
 const todosToRender  = filterTodos(todos, selectedFilters);
 renderTodos(todosToRender)
 
-export function renderDashboard() {
-    let todos = getTodos();
-
-    const selectedFilters = getFilterState();
-
-    todos = filterTodos(todos, selectedFilters);
-
-    renderTodos(todos);
-}
 
 function renderTodos(todos) {
   if (!todoCardSection) return;
@@ -344,3 +335,13 @@ todoCardContainer.addEventListener("change", (e) => {
 form.addEventListener("input",() => {
   updateSubmitButtonState(form,modalSubmitBtn)
 })
+
+export function renderDashboard() {
+    let todos = getTodos();
+
+    const selectedFilters = getFilterState();
+
+    todos = filterTodos(todos, selectedFilters);
+
+    renderTodos(todos);
+}
