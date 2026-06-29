@@ -72,11 +72,8 @@ taskFilterContainer.addEventListener("change", (e) => {
 
     const type = filterOption.dataset.filterType
     const value = radio.value
-    const checked = radio.checked;
 
-    console.log(value)
-
-    updateSingleSelectFilters(type, value, checked)
+    updateSingleSelectFilters(type, value)
 
     return
   }
@@ -153,7 +150,7 @@ function updateMultiSelectFilters(id, type, checked) {
 }
 
 
-function updateSingleSelectFilters(type, value, checked){
+function updateSingleSelectFilters(type, value){
   if(type === "status"){
       selectedFilters.status = value
   }else if(type === "dueDate"){
@@ -183,14 +180,39 @@ export function filterTodos(todos, selectedFilters) {
       selectedFilters.priorities.length === 0 ||
       selectedFilters.priorities.includes(Number(todo.priority));
 
-    const statusPass = 
-      selectedFilters.status === "All" ||
-      selectedFilters.status.includes(todo.completed)
+      let statusPass;
 
-    const dueDatePass = 
-      selectedFilters.dueDate ===  "All" ||
-      selectedFilters.dueDate.includes(todo.dueDate)
+     if (selectedFilters.status === "All") {
+       statusPass = true;
+    }
 
+if (selectedFilters.status === "active") {
+    statusPass = !todo.completed;
+}
+
+if (selectedFilters.status === "completed") {
+    statusPass = todo.completed;
+}
+
+let dueDatePass;
+
+if(selectedFilters.dueDate === "All"){
+   dueDatePass = true
+}
+  
+
+if(selectedFilters.dueDate === "today"){
+  dueDatePass = true
+
+}
+if(selectedFilters.dueDate === "week"){
+
+  
+
+}
+if(selectedFilters.dueDate === "overdue"){
+
+}
 
 
     return categoryPass && priorityPass && statusPass && dueDatePass
