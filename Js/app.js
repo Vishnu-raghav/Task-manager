@@ -14,8 +14,7 @@ export function rerenderPage() {
 
   if (page === "dashboard"){
     import("./dashboard.js").then(m => {
-      m.renderDashboard();
-      m.renderCompletedTodos();
+      m.renderDashboard()
     });
   }
 

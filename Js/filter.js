@@ -15,7 +15,6 @@ const priorityList = document.getElementById("filterPriorityList");
 
 let selectedFilters = getFilterState();
 
-
 taskFilterContainer.addEventListener("click", (e) => {
   const taskFilterButton = e.target.closest("#filterBtn");
   const cancelButton = e.target.closest("#cancelFiltersBtn");
@@ -154,7 +153,6 @@ function updateMultiSelectFilters(id, type, checked) {
   }
 
 }
-
 
 function updateSingleSelectFilters(type, value){
   if(type === "status"){

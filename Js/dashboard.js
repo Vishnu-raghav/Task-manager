@@ -42,14 +42,8 @@ if (select) {
   });
 }
 
-const todos = getTodos();
-const selectedFilters = getFilterState();
 
-const todosToRender  = filterTodos(todos, selectedFilters);
-renderTodos(todosToRender)
-
-
-function renderTodos(todos) {
+function renderTodos(activeTodos) {
   if (!todoCardSection) return;
 
   todoCardSection.innerHTML = "";
@@ -58,20 +52,16 @@ function renderTodos(todos) {
   const priorities = getPriorities()
   
   
-  if (todos.length === 0) {
+  if (activeTodos.length === 0) {
     todoCardSection.innerHTML = `
       <div class="empty-state">
         <p>No tasks Click "Add Task" to get started</p>
       </div>
     `;
-    updateProgressUI();
-    return;
+  
   }
 
-  todos.forEach(task => {
-    if (task.completed) return; 
-
-
+  activeTodos.forEach(task => {
     const categoryObj = categories.find(c => c.id === Number(task.category));
     const categoryName = categoryObj ? categoryObj.name : "General";
 
@@ -133,32 +123,23 @@ function renderTodos(todos) {
     todoCardSection.appendChild(card);
   });
 
-  updateProgressUI();
 }
 
-export function renderCompletedTodos() {
+ function renderCompletedTodos(completedTodos) {
   if (!completedTaskSection) return;
 
   completedTaskSection.innerHTML = "";
 
-  const todos = getTodos();
   const categories = getCategories()
   const priorities = getPriorities()
 
-  const completed = todos.filter(t => t.completed);
 
-
-  if (completed.length === 0) {
+  if (completedTodos.length === 0) {
     completedTaskSection.innerHTML = `<p style="padding:10px;color:#777;">No completed tasks</p>`;
     return;
   }
 
-  completed.forEach(task => {
-    const categoryObj = categories.find(c => c.id === Number(task.category));
-    const categoryName = categoryObj ? categoryObj.name : "General";
-
-    const priorityObj = priorities.find(p => p.id === Number(task.priority))
-    const priorityName = priorityObj ? priorityObj.name : "Medium"
+  completedTodos.forEach(task => {
 
     const card = document.createElement("div");
     card.className = "todo-card";
@@ -221,9 +202,7 @@ export function deleteTodoHandle(id){
 
  }
 
-function updateProgressUI() {
-  const todos = getTodos();
-
+function updateProgressUI(todos) {
   const total = todos.length;
   const completed = todos.filter(t => t.completed).length;
   const pending = total - completed;
@@ -331,17 +310,24 @@ todoCardContainer.addEventListener("change", (e) => {
   rerenderPage()
 });
 
-
 form.addEventListener("input",() => {
   updateSubmitButtonState(form,modalSubmitBtn)
 })
 
 export function renderDashboard() {
-    let todos = getTodos();
-
-    const selectedFilters = getFilterState();
-
-    todos = filterTodos(todos, selectedFilters);
-
-    renderTodos(todos);
+  const todos = getTodos();
+  
+  const selectedFilters = getFilterState();
+  
+  const filteredTodos = filterTodos(todos, selectedFilters);
+  
+  const activeTodos = filteredTodos.filter(todo => !todo.completed)
+  
+  const completedTodos = filteredTodos.filter(todo => todo.completed);
+  
+  renderTodos(activeTodos);
+  
+  renderCompletedTodos(completedTodos);
+  
+  updateProgressUI(todos);
 }
