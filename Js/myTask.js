@@ -11,6 +11,10 @@ import {
 
 import {populateOptions as populateCategoryOptions} from "../utils/populateOptions.js"
 import { filterTodos } from "./filter.js";
+import {resetPriorityDropdown} from "./priority.js"
+import { clearImage } from "../utils/imageState.js";
+import  {resetImagePreview} from "./modal.js"
+
 
 const rightPanel = document.querySelector(".grid-right-area");
 const listSection = document.querySelector(".task-card-section");
@@ -43,8 +47,6 @@ function formatDate(dateString){
 
 }
 
-
-
 export function renderMyTaskDashboard(){
   let todos = getTodos()
   const selectedFilters = getFilterState()
@@ -52,7 +54,6 @@ export function renderMyTaskDashboard(){
   todos = filterTodos(todos, selectedFilters)
   renderTaskList(todos)
 }
-
 
 function renderTaskList(todos) {
 
@@ -322,6 +323,10 @@ rightPanel.addEventListener("click", (e) => {
 addTaskBtn.addEventListener("click", () => {
   form.reset();
   clearEditState();
+  clearImage()
+  resetImagePreview()
+  
+  resetPriorityDropdown()
   modalSubmitBtn.disabled = true;
   
   modalHeading.innerText = "Add New Task";

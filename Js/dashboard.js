@@ -20,6 +20,10 @@ import {
 
 import {populateOptions as populateCategoryOptions,} from "../utils/populateOptions.js"
 import { filterTodos } from "./filter.js";
+import {resetPriorityDropdown} from "./priority.js"
+import { clearImage } from "../utils/imageState.js";
+import  {resetImagePreview} from "./modal.js"
+
 
 const form = document.getElementById("todoForm");
 const todoCardSection = document.querySelector(".task-card-section");
@@ -261,8 +265,12 @@ function updateProgressUI(todos) {
 }
 
 addTaskBtn.addEventListener("click", () => {
-  form.reset();
-  clearEditState();
+  form.reset()
+  clearEditState()
+  clearImage()
+  resetImagePreview()
+
+  resetPriorityDropdown()
   modalSubmitBtn.disabled = true;
   
   modalHeading.innerText = "Add New Task";

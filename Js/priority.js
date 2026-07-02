@@ -39,6 +39,7 @@ selected.addEventListener("click", () => {
 
     isAddingPriority = false;
     renderPriorityInputSection();
+    
   }
 });
 
@@ -193,7 +194,7 @@ function populateCustomDropdown(){
      priorityContainer.appendChild(addBtn);
 }
 
-function resetPriorityDropdown() {
+export function resetPriorityDropdown() {
   selected.innerText = "Select Priority";
   dropdown.dataset.value = "";
 }
