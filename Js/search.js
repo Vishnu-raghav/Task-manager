@@ -1,54 +1,43 @@
 import { getTodos, getCategories } from "./storage.js";
 
-const searchModal = document.getElementById("todoDropdown")
+const searchDropdown = document.getElementById("todoDropdown")
 const searchBar = document.getElementById("task-search-input")
 
 searchBar.addEventListener("input", () => {
-
-   const query = searchBar.value.trim()
+  const query = searchBar.value.trim()
 
   if(!query){
-    searchModal.classList.remove("show")
-    searchButton.innerHTML = ""
+    searchDropdown.classList.remove("show")
+    searchDropdown.innerHTML = ""
     return
   }
-  searchModal.classList.add("show");
-  searchquery(query)
+  searchDropdown.classList.add("show");
+  const matchedTodos = searchQuery(query);
+
+  renderSearchResult(matchedTodos);
+
 })
 
-const searchButton = document.getElementById("todo-search-button")
-
-searchButton.addEventListener("click", (e) => {
-  searchModal.classList.add("show");
-
-   setTimeout(() => {
-    searchModal.classList.remove("show");
-   }, 2000);
-})
-
-
-
-function searchquery(query){
-  searchModal.innerHTML = ""
-   
+function searchQuery(query){
   const todos = getTodos()
   const searchText = query.toLowerCase();
 
   const matchedTodos = todos.filter(todo => {
   return (
-    todo.title.toLowerCase().includes(searchText) ||
-    todo.desc.toLowerCase().includes(searchText)
+    todo.title.trim().toLowerCase().includes(searchText) ||
+    (todo.desc || "").trim().toLowerCase().includes(searchText)
   )
 })
-
-renderSearchResult(matchedTodos)
+ return matchedTodos
 }
 
+
 function renderSearchResult(matchedTodos){
+    searchDropdown.innerHTML = ""
     const categories = getCategories()
 
     if(matchedTodos.length === 0){
-      searchModal.innerHTML = ` 
+      searchDropdown.innerHTML = ` 
        <div>
         <p>Not found</p>
       </div>
@@ -56,16 +45,18 @@ function renderSearchResult(matchedTodos){
       return
     }
 
-    matchedTodos.forEach(todo => {
-    const categoryObj = categories.find(c => c.id === Number(todo.category));    
+    matchedTodos.slice(0,5).forEach(task => {
+
+    const categoryObj = categories.find(c => c.id === Number(task.category));
+      
     const div = document.createElement("div")
     div.className = "search-output"
-    div.dataset.id = todo.id
+    div.dataset.id = task.id
       div.innerHTML = `
-    <p>${todo.title}</p>
+    <p>${task.title}</p>
     <span>${categoryObj ? `${categoryObj.name}` : `General`}</span>
     `
-    searchModal.appendChild(div)
+    searchDropdown.appendChild(div)
       
     });
    
