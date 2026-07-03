@@ -4,15 +4,26 @@ const searchModal = document.getElementById("todoDropdown")
 const searchBar = document.getElementById("task-search-input")
 
 searchBar.addEventListener("input", () => {
+
    const query = searchBar.value.trim()
-    
-   if (query) {
-      searchModal.classList.add("show");
-   } else {
-      searchModal.classList.remove("show");
-   }
-   
-   searchquery(query)
+
+  if(!query){
+    searchModal.classList.remove("show")
+    searchButton.innerHTML = ""
+    return
+  }
+  searchModal.classList.add("show");
+  searchquery(query)
+})
+
+const searchButton = document.getElementById("todo-search-button")
+
+searchButton.addEventListener("click", (e) => {
+  searchModal.classList.add("show");
+
+   setTimeout(() => {
+    searchModal.classList.remove("show");
+   }, 2000);
 })
 
 
@@ -21,33 +32,41 @@ function searchquery(query){
   searchModal.innerHTML = ""
    
   const todos = getTodos()
-  const title = todos.forEach(todo => {
-  const title = todo.title
+  const searchText = query.toLowerCase();
 
-  const found = title
-  .toLowerCase()
-  .includes(query.toLowerCase());
+  const matchedTodos = todos.filter(todo => {
+  return (
+    todo.title.toLowerCase().includes(searchText) ||
+    todo.desc.toLowerCase().includes(searchText)
+  )
+})
 
-  console.log(found);
-  if(found){
-    renderSearchResult(todo)
-  }else{
-    console.log("not found")
-  }
-  })
+renderSearchResult(matchedTodos)
 }
 
-function renderSearchResult(todo){
+function renderSearchResult(matchedTodos){
     const categories = getCategories()
-    const categoryObj = categories.find(c => c.id === Number(todo.category));
-    console.log(categoryObj)
-    
+
+    if(matchedTodos.length === 0){
+      searchModal.innerHTML = ` 
+       <div>
+        <p>Not found</p>
+      </div>
+      `
+      return
+    }
+
+    matchedTodos.forEach(todo => {
+    const categoryObj = categories.find(c => c.id === Number(todo.category));    
     const div = document.createElement("div")
     div.className = "search-output"
     div.dataset.id = todo.id
-    div.innerHTML = `
+      div.innerHTML = `
     <p>${todo.title}</p>
     <span>${categoryObj ? `${categoryObj.name}` : `General`}</span>
     `
     searchModal.appendChild(div)
+      
+    });
+   
 }

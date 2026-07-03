@@ -75,7 +75,7 @@ function renderTodos(activeTodos) {
         <p>No tasks Click "Add Task" to get started</p>
       </div>
     `;
-  
+   return
   }
 
   activeTodos.forEach(task => {
