@@ -1,4 +1,4 @@
-import { getTodos, getCategories } from "./storage.js";
+import { getTodos, getCategories, saveTaskId } from "./storage.js";
 
 const searchDropdown = document.getElementById("todoDropdown")
 const searchBar = document.getElementById("task-search-input")
@@ -72,4 +72,22 @@ function renderSearchResult(matchedTodos){
       
     });
    
+}
+
+searchDropdown.addEventListener("click", (e) => {
+  const task = e.target.closest(".search-output")
+  if(task){
+    const id = Number(task.dataset.id)
+    saveTaskId(id)
+    routeTask(id)
+    return
+  }
+
+})
+
+function routeTask(id){
+  window.location.href = "MyTask.html";
+  searchDropdown.classList.remove("show")
+  searchDropdown.innerHTML = ""
+
 }

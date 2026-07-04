@@ -26,6 +26,7 @@ export const getCategories = () => safeParse("categories")
 export const getPriorities = () => safeParse("priorities")
 export const getFilterState = () => safeParseObject("selectedFilters", defaultFilterState)
 
+
 export function saveTodos(todos) {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
@@ -45,7 +46,6 @@ export function saveFilterState(filters) {
 export function clearFilterState() {
   localStorage.setItem("selectedFilters", JSON.stringify(defaultFilterState));
 }
-
 
 const defaultCategories = [
   {id: 1, name: "Study",isDefault: true },
@@ -81,6 +81,18 @@ export function initializePriorities() {
 }
 
 
+export function saveTaskId(id){
+  sessionStorage.setItem("taskId", id);
+}
 
+export function getTaskId() {
+    const id = sessionStorage.getItem("taskId");
+
+    return id ? Number(id) : null;
+}
+
+export function clearTaskId(){
+    sessionStorage.removeItem("taskId");
+}
 
 

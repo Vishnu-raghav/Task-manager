@@ -1,4 +1,4 @@
-import { getCategories, getTodos , getPriorities, getFilterState} from "./storage.js";
+import { getCategories, getTodos , getPriorities, getFilterState, getTaskId, clearTaskId} from "./storage.js";
 import { clearEditState, getEditState ,openEditTask } from "./taskActions.js";
 import {initForm,updateSubmitButtonState} from "./formUtils.js"
 import {openConfirmModal} from "./actionsConfirm.js"
@@ -52,14 +52,21 @@ export function renderMyTaskDashboard(){
   const selectedFilters = getFilterState()
 
   todos = filterTodos(todos, selectedFilters)
+  
+  const selectedTaskId = getTaskId()
+
+  if(selectedTaskId !== null){
+    activeTaskId = selectedTaskId
+    clearTaskId()
+  }
   renderTaskList(todos)
 }
 
 function renderTaskList(todos) {
-
   const category = getCategories()
   const priority = getPriorities()
-  
+
+
   listSection.innerHTML = "";
 
   if (todos.length === 0) {
@@ -166,7 +173,6 @@ function renderTaskList(todos) {
 }
 
 function showDetails(id) {
-
   const detailContainer = document.querySelector(".task-detail-container")
   if (!detailContainer) return;
 
@@ -180,10 +186,8 @@ function showDetails(id) {
         <p>Select a task to view details</p>
       </div>
     `
-
     return
-}
-
+  }
   const categories = getCategories()
   const categoryObj = categories.find((cat) => cat.id == todo.category) 
   const statusText = todo.completed ? "Completed" : "In progress";
