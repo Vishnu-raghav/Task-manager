@@ -38,9 +38,15 @@ function renderSearchResult(matchedTodos){
 
     if(matchedTodos.length === 0){
       searchDropdown.innerHTML = ` 
-       <div>
-        <p>Not found</p>
-      </div>
+       <div class="search-empty">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <h4>No task found</h4>
+
+    <p>Try another keyword.</p>
+
+</div>
       `
       return
     }
@@ -52,10 +58,16 @@ function renderSearchResult(matchedTodos){
     const div = document.createElement("div")
     div.className = "search-output"
     div.dataset.id = task.id
-      div.innerHTML = `
-    <p>${task.title}</p>
-    <span>${categoryObj ? `${categoryObj.name}` : `General`}</span>
-    `
+     div.innerHTML = `
+    <div class="search-info">
+        <h4>${task.title}</h4>
+        <p>${task.desc || "No description"}</p>
+    </div>
+
+    <span class="search-category">
+        ${categoryObj ? categoryObj.name : "General"}
+    </span>
+`;
     searchDropdown.appendChild(div)
       
     });

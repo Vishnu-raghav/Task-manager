@@ -50,16 +50,36 @@
 }
 
 .todo-dropdown{
-  position: absolute;
-  top: 110%;
-  left: 0;
-  width: 100%;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  display: none;
-  flex-direction: column;
-  z-index: 10;
+    position:absolute;
+    top:110%;
+    left:0;
+    width:100%;
+
+    background:#fff;
+    border-radius:12px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.12);
+
+    border:1px solid #ececec;
+
+    display:none;
+
+    overflow:hidden;
+
+    max-height:320px;
+    overflow-y:auto;
+
+    z-index:1000;
+}
+
+.todo-dropdown::-webkit-scrollbar{
+    width:6px;
+}
+
+.todo-dropdown::-webkit-scrollbar-thumb{
+    background:#d7d7d7;
+    border-radius:20px;
 }
 
 
@@ -71,15 +91,115 @@
 
 
 .search-output{
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 14px;
-  cursor: pointer;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:15px;
+
+    padding:14px 16px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    border-bottom:1px solid #f1f1f1;
 }
 
 .search-output:hover{
-  background-color: #f2f2f2;
+
+    background:#f8f8f8;
 }
+
+.search-output:last-child{
+
+    border-bottom:none;
+}
+
+.search-info{
+
+    flex:1;
+    min-width:0;
+}
+
+.search-info h4{
+
+    margin:0;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:#222;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+
+.search-info p{
+
+    margin-top:4px;
+
+    color:#777;
+
+    font-size:13px;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+}
+
+
+.search-category{
+
+    background:#fff3eb;
+
+    color:#ff885d;
+
+    font-size:12px;
+
+    padding:5px 10px;
+
+    border-radius:30px;
+
+    white-space:nowrap;
+
+    font-weight:600;
+}
+
+
+.search-empty{
+
+    padding:28px;
+
+    text-align:center;
+}
+
+.search-empty i{
+
+    font-size:28px;
+
+    color:#bbb;
+}
+
+.search-empty h4{
+
+    margin:12px 0 5px;
+}
+
+.search-empty p{
+
+    color:#888;
+    font-size:13px;
+}
+
 
 .calender{
   margin-right: 20px;
