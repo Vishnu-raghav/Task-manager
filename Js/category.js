@@ -31,13 +31,14 @@ export function renderCategories() {
     const total = tasks.length;
     const completed = tasks.filter(t => t.completed).length;
     const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+    const isSelected = cat.id === activeCategoryId
    
     const lastTask = tasks.length
       ? tasks[tasks.length - 1].dueDate || "N/A"
       : "No tasks"; 
 
     const card = document.createElement("div");
-    card.className = "category-card";
+    card.className = isSelected ? "category-card active" : "category-card";
     card.dataset.id = cat.id;
     card.style.background = `linear-gradient(135deg, ${cat.color},#333)`;
 
@@ -78,15 +79,6 @@ export function renderCategories() {
   if (activeCategoryId !== null) {
 
   showCategoryTasks(activeCategoryId); 
-
-  const activeCard = document.querySelector(
-    `.category-card[data-id="${activeCategoryId}"]`
-  );
-
-  if (activeCard) {
-    activeCard.classList.add("active");
-    activeCard.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
 
   }else{
    rightPanel.innerHTML = `
@@ -181,6 +173,7 @@ if(Number.isNaN(id)) return
 
   openConfirmModal("Delete this category?", () => {
     deleteCategory(id);
+    activeCategoryId = null;
     renderCategories();
     rightPanel.innerHTML = `
     <div class="empty-state">
@@ -188,7 +181,6 @@ if(Number.isNaN(id)) return
       <p>Select a category to view tasks</p>
     </div>
   `;
-  activeCategoryId = null;
   });
 }
 
@@ -228,15 +220,9 @@ categorySection.addEventListener("click", (e) => {
   const card = e.target.closest(".category-card");
   if (!card) return;
 
-  document.querySelectorAll(".category-card").forEach(c => {
-    c.classList.remove("active");
-  });
-
-  card.classList.add("active");
-
-  const categoryID = card.dataset.id;
+  const categoryID = Number(card.dataset.id);
   activeCategoryId = categoryID;
-  showCategoryTasks(categoryID);
+  renderCategories()
 });
 
 createCategoryButton.addEventListener("click", () => {

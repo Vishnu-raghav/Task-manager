@@ -15,7 +15,6 @@ import {resetPriorityDropdown} from "./priority.js"
 import { clearImage } from "../utils/imageState.js";
 import  {resetImagePreview} from "./modal.js"
 
-
 const rightPanel = document.querySelector(".grid-right-area");
 const listSection = document.querySelector(".task-card-section");
 const form = document.getElementById("todoForm");
@@ -85,14 +84,12 @@ function renderTaskList(todos) {
     const priorityObj = priority.find((p) => p.id === Number(task.priority)) 
     const statusText = task.completed ? "Completed" : "In progress";
     const statusClass = task.completed ? "completed" : "pending";
-    
+    const isSelected  = task.id === activeTaskId
     const div = document.createElement("div");
-    div.className = "task-list-item";
+    div.className = isSelected ? "task-list-item active" : "task-list-item";
     div.dataset.id = task.id;
     div.innerHTML = `
-
-
-     <div class="task-list-header">
+  <div class="task-list-header">
   
   <div class="task-list-content">
     <span 
@@ -164,6 +161,7 @@ function renderTaskList(todos) {
     `
     listSection.appendChild(div);
   });
+
 
   if (activeTaskId !== null) {
     showDetails(activeTaskId);
@@ -302,7 +300,7 @@ listSection.addEventListener("click", (e) => {
 
   const id = Number(card.dataset.id);
   activeTaskId = id;
-  showDetails(id);
+  renderMyTaskDashboard()
 });
 
 rightPanel.addEventListener("click", (e) => {
