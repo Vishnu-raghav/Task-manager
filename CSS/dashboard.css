@@ -1,6 +1,6 @@
 .home{
   padding: 24px;
-  min-height: calc(100vh - 80px); /* header adjust */
+  min-height: calc(100vh - 80px); 
   background: #f3f4f8;
 }
 
@@ -14,8 +14,8 @@
 
 .grid-left-area,
 .grid-right-area{
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(10px);
+  position: relative;
+  background: transparent;
   border-radius: 20px;
   padding: 20px;
   border: 1px solid rgba(255,255,255,0.3);
@@ -23,11 +23,21 @@
   box-shadow: 0 8px 32px rgba(0,0,0,0.08);
 }
 
+.grid-left-area::before,
+.grid-right-area::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  z-index: -1;
+}
+
 body[data-page="dashboard"] .grid-left-area{
     display: flex;
     flex-direction: column;
     height: calc(100vh - 120px);
-    overflow: hidden;
 }
 
 body[data-page="dashboard"] .grid-right-area{
@@ -36,7 +46,6 @@ body[data-page="dashboard"] .grid-right-area{
   gap: 16px;
   height: calc(100vh - 120px); 
 }
-
 
 .task-header{
   display: flex;
@@ -95,10 +104,14 @@ body[data-page="dashboard"] .grid-right-area{
   border: 1px solid #eee;
   transition: all 0.3s ease;
   position: relative;
+   width:100%;
+    max-width:100%;
+    min-width:0;
 }
 
 .task-card-section .todo-card{
   min-height: 180px;
+  flex-shrink: 0;
 }
 
 .todo-card:hover{
@@ -122,6 +135,10 @@ body[data-page="dashboard"] .grid-right-area{
   right: 25px;
   z-index: 100;
   display: none;
+
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  min-width: 130px;
 }
 
 .card-popup.active{
@@ -141,6 +158,8 @@ body[data-page="dashboard"] .grid-right-area{
   transition: all 0.3s ease;
   padding: 10px;
   border-radius: 12px;
+  width: 100%;
+  text-align: center;
 }
 
 .card-popup li:hover{
@@ -162,8 +181,10 @@ background-color: rgb(234, 228, 228);
 }
 
 .task-details{
-  flex: 1;
-   min-width: 0;
+     flex:1;
+    min-width:0;
+    max-width:100%;
+
 }
 
 .task-details span{
@@ -174,7 +195,8 @@ background-color: rgb(234, 228, 228);
   -webkit-line-clamp: 1;  
   -webkit-box-orient: vertical;
   overflow: hidden;
-  overflow-wrap: break-word;
+      overflow-wrap:anywhere;
+
 }
 
 .task-details p{
@@ -301,6 +323,16 @@ background-color: rgb(234, 228, 228);
 
   -webkit-line-clamp: 1;
 }
+.complete-tasks-section .task-details{
+    flex:1;
+    min-width:0;
+    max-width:100%;
+}
+
+.task-details span,
+.task-details p{
+    overflow-wrap:anywhere;
+}
 
 .complete-tasks-section-header{
   display: flex;
@@ -321,19 +353,199 @@ background-color: rgb(234, 228, 228);
   height: 50px;
 }
 
-@media (max-width: 700px){
+@media (max-width:1200px){
 
-  .task-card{
-    flex-direction: column;
-  }
+.home{
+    padding:18px;
+}
 
-  .img-card{
-    width: 100%;
-  }
+.grid-container{
+    gap:16px;
+}
 
-  .task-Progress{
-    margin-left: 0;
-  }
+.grid-left-area,
+.grid-right-area{
+    padding:18px;
+}
+
+.task-card{
+    gap:12px;
+}
+
+}
+
+
+@media (max-width:992px){
+
+.grid-container{
+    grid-template-columns:1fr;
+}
+
+body[data-page="dashboard"] .grid-left-area,
+body[data-page="dashboard"] .grid-right-area{
+    height:auto;
+}
+
+.grid-left-area,
+.grid-right-area{
+    min-height:auto;
+}
+
+.task-card-section{
+    max-height:400px;
+    overflow-y:auto;
+}
+
+.complete-tasks-section{
+    max-height:350px;
+}
+
+}
+@media (max-width:768px){
+
+.home{
+    padding:14px;
+}
+
+.task-header{
+    flex-direction:column;
+    align-items:stretch;
+    gap:14px;
+}
+
+.task-header-controls{
+
+    width:100%;
+
+    justify-content:flex-end;
+
+    gap:10px;
+}
+
+.header-task-actions{
+
+    position:relative;
+
+    flex:0 0 auto;
+}
+
+.Add-Task{
+
+    flex:none;
+}
+
+.task-card{
+    flex-direction:column;
+}
+
+.img-card{
+    width:100%;
+    height:180px;
+}
+
+.task-Progress{
+    margin-left:0;
+}
+
+.todo-card{
+    padding:14px;
+}
+
+.complete-tasks-section .task-card{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.complete-tasks-section .img-card{
+    width:100%;
+    height:170px;
+}
+
+.complete-tasks-section .task-checkbox{
+    margin-bottom:8px;
+}
+
+.complete-tasks-section .todo-card{
+    padding:12px;
+}
+
+.card-popup{
+    right: 10px;
+}
+
+}
+
+.complete-tasks-section .task-details{
+    width:100%;
+}
+
+.complete-tasks-section .task-details p{
+    overflow-wrap:anywhere;
+}
+
+@media (max-width:480px){
+
+.home{
+    padding:10px;
+}
+
+.grid-left-area,
+.grid-right-area{
+    padding:14px;
+    border-radius:14px;
+}
+
+.task-details span{
+    font-size:15px;
+}
+
+.task-details p{
+    font-size:13px;
+}
+
+.task-meta{
+    flex-direction:column;
+    gap:8px;
+}
+
+.progress-key{
+    font-size:10px;
+}
+
+.complete-tasks-section-header{
+    font-size:14px;
+}
+
+.header-task-actions{
+
+    flex:none;
+}
+
+.Add-Task{
+
+    flex:none;
+}
+
+.complete-tasks-section .task-details span{
+    font-size:13px;
+}
+
+.complete-tasks-section .task-details p{
+    font-size:12px;
+}
+
+.complete-tasks-section .img-card{
+    height:140px;
+}
+
+.card-popup{
+    right: 4px;
+    min-width: 120px;
+}
+
+.grid-right-area .Task-bar-section{
+    height: auto;
+}
 
 }
 
@@ -415,10 +627,22 @@ background-color: rgb(234, 228, 228);
 }
 
 .task-header-controls{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:12px;
+
+    position:relative;
+    flex-shrink:0;
+}
+
+.header-task-actions{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+
+    flex-shrink:0;
 }
 
 .Add-Task{

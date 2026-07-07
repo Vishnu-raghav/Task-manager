@@ -37,62 +37,144 @@
   </head>
   <body data-page="dashboard">
     <header class="Todo-header">
-      <i class="fa-solid fa-bars mobile-menu-btn"></i>
 
-      <div class="todo-logo">
-        <span style="color: rgb(255, 136, 93)">Smart</span>-todo-app
+  <!-- Mobile Menu -->
+  <i class="fa-solid fa-bars mobile-menu-btn"></i>
+
+  <!-- Logo -->
+  <div class="todo-logo">
+
+    <div class="logo-icon">
+      <i class="fa-solid fa-list-check"></i>
+    </div>
+
+    <div class="logo-content">
+      <h2>TaskFlow</h2>
+      <span>Productivity Suite</span>
+    </div>
+
+  </div>
+
+  <!-- Search -->
+  <div class="todo-search-container">
+
+    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+
+    <input
+      type="text"
+      id="task-search-input"
+      placeholder="Search tasks..."
+    />
+
+    <div class="todo-dropdown" id="todoDropdown">
+      <!-- JS -->
+    </div>
+
+  </div>
+
+  <!-- Right Side -->
+  <div class="calender">
+
+    <div class="header-date">
+
+      <span class="date-title">
+        Today
+      </span>
+
+      <span class="date-value">
+        Tue, Jul 7
+      </span>
+
+    </div>
+
+  </div>
+
+</header>
+
+    <aside class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-brand">
+      <div class="brand-text">
+        <h3>TaskFlow</h3>
+        <span>Productivity Suite</span>
       </div>
+    </div>
 
-       <div class="todo-search-container">
-        <input
-          type="text"
-          id="task-search-input"
-          placeholder="search your task here"
-        />
+    <i class="fa-solid fa-chevron-left toggle"></i>
 
-        <div class="todo-dropdown" id="todoDropdown">
-          <!-- <div class="search-output">
-            <p>Buy milk</p>
-            <span>Personal</span>
-          </div>
-          <div class="search-output">
-            <p>Study JS</p>
-            <span>Study</span>
-          </div> -->
-        </div>
-      </div>
+  </div>
 
-      <div class="calender"></div>
-    </header>
 
-    <aside class="sidebar ">
-      <div class="sidebar-header">
-        <i class="fa-solid fa-chevron-right toggle"></i>
-      </div>
+  <div class="menu-bar">
 
-      <div class="menu-bar">
-        <ul class="menu-link">
-          <li class="nav-link">
-            <a href="dashboard.html">
-              <i class="fa-regular fa-house icon"></i>
-              <span class="text nav-text">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-link">
-            <a href="MyTask.html">
-              <i class="fa-sharp fa-solid fa-bars icon"></i>
-              <span class="text nav-text">My Task</span>
-            </a>
-          </li>
-          <li class="nav-link">
-            <a href="categories.html">
-              <i class="fa-solid fa-exclamation icon"></i>
-              <span class="text nav-text">Task Categories</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </aside>
+    <p class="menu-title">MAIN MENU</p>
+
+    <ul class="menu-link">
+
+      <li class="nav-link">
+
+        <a href="dashboard.html">
+
+          <i class="fa-solid fa-chart-line icon"></i>
+
+          <span class="text nav-text">
+            Dashboard
+          </span>
+
+        </a>
+
+      </li>
+
+      <li class="nav-link">
+
+        <a href="MyTask.html">
+
+          <i class="fa-solid fa-list-check icon"></i>
+
+          <span class="text nav-text">
+            My Tasks
+          </span>
+
+        </a>
+
+      </li>
+
+      <li class="nav-link">
+
+        <a href="categories.html">
+
+          <i class="fa-solid fa-layer-group icon"></i>
+
+          <span class="text nav-text">
+            Categories
+          </span>
+
+        </a>
+
+      </li>
+
+    </ul>
+
+  </div>
+
+  <div class="sidebar-footer">
+
+    <div class="sidebar-version">
+
+        <i class="fa-solid fa-code-branch icon"></i>
+
+        <span class="text">
+
+            Version 1.0
+
+        </span>
+
+    </div>
+
+</div>
+
+</aside>
 
     <main class="home">
       <div class="grid-container">
@@ -105,7 +187,7 @@
           
             <div class="task-header-controls">
 
-    <div class="task-filter">
+               <div class="task-filter">
 
       <button class="task-filter-btn" id="filterBtn" type="button">
         <i class="fa-solid fa-filter"></i>
@@ -233,7 +315,7 @@
         </div>
       </div>
 
-    </div>
+        </div>
 
     <div class="Add-Task">
       <i class="fa-solid fa-plus icon"></i>
@@ -241,6 +323,8 @@
     </div>
 
             </div>
+
+
           </div>
 
           <div class="task-card-section">
@@ -386,7 +470,7 @@
 
       <div class="modal-input">
       <label>Priority</label>
-    `
+    
      <div class="custom-dropdown" id="priorityDropdown">
         <div class="dropdown-selected"></div>
     

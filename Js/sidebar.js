@@ -22,7 +22,15 @@ window.addEventListener("load", () => {
 
 toggle.addEventListener("click", () => {
   if (!isMobile()) {
-    sidebar.classList.toggle("close");
+    // sidebar.classList.toggle("close");
+    
+    sidebar.classList.add("animating");
+sidebar.classList.toggle("close");
+setTimeout(() => {
+    sidebar.classList.remove("animating");
+},10);
+
+
     document.body.classList.toggle("sidebar-close");
 
     const isClosed = sidebar.classList.contains("close");

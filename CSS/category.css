@@ -299,8 +299,557 @@ body[data-page="category"] .grid-right-area{
 }
 
 
-@media (max-width: 700px){
-  .category-card-section{
-    grid-template-columns: 1fr;
+/* 
+  Layout + Grid + Right Panel
+*/
+
+@media (max-width:1200px){
+
+  body[data-page="category"] .grid-right-area{
+    height:auto;
+    min-height:520px;
   }
+
+  .category-card-section{
+    grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+    gap:16px;
+  }
+
+}
+
+@media (max-width:992px){
+
+  body[data-page="category"] .grid-right-area{
+
+    height:auto;
+
+    min-height:450px;
+
+    overflow:hidden;
+  }
+
+  .task-category-header{
+
+    margin-bottom:16px;
+  }
+
+  .task-category-header h4{
+
+    font-size:17px;
+  }
+
+  .category-card-section{
+
+    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+
+    gap:14px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  body[data-page="category"] .grid-container{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+  }
+
+  body[data-page="category"] .grid-left-area,
+  body[data-page="category"] .grid-right-area{
+
+    width:100%;
+  }
+
+  body[data-page="category"] .grid-right-area{
+
+    min-height:420px;
+
+    height:auto;
+  }
+
+  .task-category-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:16px;
+  }
+
+  .task-category-header h4{
+
+    font-size:18px;
+  }
+
+  #add-category-button{
+
+    padding:10px 16px;
+
+    border-radius:10px;
+
+    font-size:13px;
+
+    white-space:nowrap;
+  }
+
+  .category-card-section{
+
+    grid-template-columns:repeat(2,minmax(0,1fr));
+
+    gap:14px;
+  }
+
+}
+
+
+@media (max-width:600px){
+
+  .task-category-header{
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+    gap:12px;
+  }
+
+  .task-category-header h4{
+
+    font-size:17px;
+  }
+
+  #add-category-button{
+
+    width:100%;
+
+    height:42px;
+  }
+
+  .category-card-section{
+
+    grid-template-columns:1fr;
+
+    gap:14px;
+  }
+
+  body[data-page="category"] .grid-right-area{
+
+    min-height:350px;
+  }
+
+  .category-right-header{
+
+    padding:14px;
+  }
+
+  .category-right-header h3{
+
+    font-size:15px;
+  }
+
+  .category-right-header span{
+
+    font-size:12px;
+  }
+
+}
+
+
+@media (max-width:480px){
+
+  .task-category-header{
+
+    margin-bottom:14px;
+  }
+
+  .task-category-header h4{
+
+    font-size:16px;
+  }
+
+  #add-category-button{
+
+    font-size:12px;
+
+    height:40px;
+  }
+
+  body[data-page="category"] .grid-right-area{
+
+    border-radius:12px;
+
+    min-height:300px;
+  }
+
+  .category-right-header{
+
+    padding:12px;
+  }
+
+}
+
+
+@media (max-width:360px){
+
+  .task-category-header h4{
+
+    font-size:15px;
+  }
+
+  #add-category-button{
+
+    height:38px;
+
+    font-size:11px;
+  }
+
+}
+
+
+
+/* 
+ Cards + Task Panel + Mobile Polish
+*/
+
+@media (max-width:1200px){
+
+  .category-card{
+    padding:15px;
+  }
+
+  .category-card h3{
+    font-size:15px;
+  }
+
+  .categories-actions{
+    top:8px;
+    right:8px;
+  }
+
+}
+
+
+
+@media (max-width:992px){
+
+  .category-card{
+
+    padding:14px;
+
+    border-radius:14px;
+  }
+
+  .category-card h3{
+
+    font-size:14px;
+  }
+
+  .category-card p{
+
+    font-size:12px;
+  }
+
+  .categories-actions button{
+
+    width:26px;
+    height:26px;
+  }
+
+  .categories-actions i{
+
+    font-size:11px;
+  }
+
+}
+
+
+@media (max-width:768px){
+
+  .category-card{
+
+    padding:14px;
+
+    gap:8px;
+  }
+
+  .category-card h3{
+
+    font-size:15px;
+  }
+
+  .category-card p{
+
+    font-size:12px;
+  }
+
+  .progress-bar{
+
+    height:6px;
+  }
+
+  .categories-actions{
+
+    top:10px;
+    right:10px;
+
+    gap:6px;
+  }
+
+  .categories-actions button{
+
+    width:28px;
+    height:28px;
+  }
+
+  .category-tasks-container{
+
+    padding:14px;
+  }
+
+  .task-item{
+
+    margin-bottom:12px;
+  }
+
+  .category-task-card{
+
+    padding:14px;
+  }
+
+  .category-task-title{
+
+    font-size:15px;
+  }
+
+  .category-task-desc{
+
+    font-size:13px;
+  }
+
+  .category-task-footer{
+
+    font-size:12px;
+  }
+
+}
+
+
+@media (max-width:600px){
+
+  .category-card{
+
+    padding:13px;
+
+    border-radius:12px;
+  }
+
+  .category-card h3{
+
+    font-size:14px;
+  }
+
+  .category-card p{
+
+    font-size:11px;
+  }
+
+  .categories-actions{
+
+    gap:5px;
+  }
+
+  .categories-actions button{
+
+    width:26px;
+    height:26px;
+  }
+
+  .progress-bar{
+
+    height:5px;
+  }
+
+  .category-tasks-container{
+
+    padding:12px;
+  }
+
+  .category-task-card{
+
+    padding:12px;
+
+    border-radius:12px;
+  }
+
+  .category-task-top{
+
+    gap:8px;
+  }
+
+  .category-task-title{
+
+    font-size:14px;
+  }
+
+  .category-task-desc{
+
+    font-size:12px;
+
+    margin-bottom:10px;
+  }
+
+  .category-task-footer{
+
+    flex-wrap:wrap;
+
+    gap:8px;
+
+    font-size:11px;
+  }
+
+  .priority-pill{
+
+    font-size:10px;
+
+    padding:4px 8px;
+  }
+
+}
+
+
+@media (max-width:480px){
+
+  .category-card{
+
+    padding:12px;
+  }
+
+  .category-card h3{
+
+    font-size:13px;
+  }
+
+  .category-card p{
+
+    font-size:11px;
+  }
+
+  .categories-actions{
+
+    top:8px;
+    right:8px;
+  }
+
+  .categories-actions button{
+
+    width:24px;
+    height:24px;
+
+    border-radius:6px;
+  }
+
+  .categories-actions i{
+
+    font-size:10px;
+  }
+
+  .category-tasks-container{
+
+    padding:10px;
+  }
+
+  .category-task-card{
+
+    padding:10px;
+  }
+
+  .category-task-title{
+
+    font-size:13px;
+  }
+
+  .category-task-desc{
+
+    font-size:11px;
+
+    -webkit-line-clamp:2;
+  }
+
+  .category-task-footer{
+
+    padding-top:8px;
+
+    font-size:10px;
+  }
+
+  .priority-pill{
+
+    font-size:9px;
+
+    padding:3px 7px;
+  }
+
+}
+
+
+
+
+@media (max-width:360px){
+
+  .category-card{
+
+    padding:10px;
+  }
+
+  .category-card h3{
+
+    font-size:12px;
+  }
+
+  .category-card p{
+
+    font-size:10px;
+  }
+
+  .category-task-title{
+
+    font-size:12px;
+  }
+
+  .category-task-desc{
+
+    font-size:10px;
+  }
+
+  .category-task-footer{
+
+    font-size:9px;
+  }
+
+  .priority-pill{
+
+    font-size:8px;
+
+    padding:3px 6px;
+  }
+
+  .categories-actions button{
+
+    width:22px;
+    height:22px;
+  }
+
+  .categories-actions i{
+
+    font-size:9px;
+  }
+
 }
