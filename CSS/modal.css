@@ -3,16 +3,13 @@
   inset: 0;
   background: rgba(0,0,0,0.35);
   backdrop-filter: blur(4px);
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   opacity: 0;
   pointer-events: none;
   transition: 0.25s ease;
   z-index: 999;
-
   padding: 16px;
 }
 
@@ -27,15 +24,11 @@
   max-width: 520px;
   padding: 28px;
   border-radius: 18px;
-
   max-height: 90vh;
   overflow-y: auto;
-
   transform: translateY(20px) scale(0.96);
   transition: 0.25s ease;
-
   box-shadow: 0 20px 50px rgba(0,0,0,0.12);
-
   display: flex;
   flex-direction: column;
   gap: 18px; 
@@ -116,13 +109,11 @@
   box-shadow: 0 0 0 2px rgba(255,122,122,0.15);
 }
 
-
 .task-description{
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 14px;
 }
-
 
 .custom-dropdown {
   border: 1px solid #ccc;
@@ -143,18 +134,14 @@
   left: 0;
   width: 100%;
   max-width: 100%;
-
   max-height: 220px;
   overflow-y: auto;
-
   border: 1px solid #ddd;
   border-radius: 10px;
   background: #fff;
-
   opacity: 0;
   transform: translateY(-10px);
   pointer-events: none;
-
   transition: all 0.25s ease;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   z-index: 10;
@@ -180,17 +167,12 @@
   position: absolute;
   left: calc(100% + 8px);
   top: 0;
-
   min-width: 180px;
-
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
-
   padding: 10px;
-
   box-shadow: 0 10px 25px rgba(0,0,0,.08);
-
   z-index: 50;
   display: none;
 }
@@ -207,15 +189,12 @@
   gap: 6px;
 }
 
-
 .color-option{
   display: flex;
   align-items: center;
   gap: 8px;
-
   padding: 6px 8px;
   border-radius: 6px;
-
   cursor: pointer;
   transition: .2s;
 }
@@ -223,7 +202,6 @@
 .color-box{
   width: 12px;
   height: 12px;
-
   border-radius: 3px;
   flex-shrink: 0;
 }
@@ -231,7 +209,6 @@
 .color-option:hover{
   background: #f3f4f6;
 }
-
 
 .red{
   background: #ef4444;
@@ -257,36 +234,25 @@
   background-color: gray;
 }
 
-
 .priority-badge{
   display: inline-flex;
   align-items: center;
-
   padding: 4px 10px;
-
   border-radius: 999px;
-
   font-size: 12px;
   font-weight: 600;
 }
 
 .priority-delete-btn{
   width: 100%;
-
   border: none;
   background: transparent;
-
   padding: 10px 12px;
-
   border-radius: 8px;
-
   text-align: left;
-
   cursor: pointer;
-
   font-size: 14px;
   font-weight: 500;
-
   transition: .2s;
 }
 
@@ -294,7 +260,6 @@
   background: #fef2f2;
   color: #dc2626;
 }
-
 
 .priority-dropdown-modal.active{
   display: block
@@ -304,27 +269,20 @@
   background: #f3f4f6;
 }
 
-
 .dots{
   border: none;
   background: transparent;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 32px;
   height: 32px;
-
   border-radius: 8px;
-
   cursor: pointer;
-
   color: #6b7280;
   font-size: 16px;
   font-weight: 700;
   flex-shrink: 0;
-
   transition: all 0.2s ease;
 }
 
@@ -341,7 +299,6 @@
   pointer-events: none;
 }
 
-
 .add-new {
   border-top: 1px solid #eee;
   padding: 10px 12px;
@@ -350,21 +307,14 @@
 
 .add-priority-btn{
   width: 100%;
-
   border: 1px dashed #d1d5db;
   background: #f8fafc;
-
   padding: 10px 12px;
-
   border-radius: 10px;
-
   font-size: 13px;
   font-weight: 600;
-
   color: #64748b;
-
   cursor: pointer;
-
   transition: all .2s ease;
 }
 
@@ -376,27 +326,19 @@
 
 .priority-input{
   width: 100%;
-
   height: 40px;
-
   border: 1px solid #e5e7eb;
   border-radius: 10px;
-
   padding: 0 12px;
-
   background: #fafafa;
-
   font-size: 14px;
-
   outline: none;
-
   transition: .2s;
 }
 
 .priority-input:focus{
   background: #fff;
   border-color: var(--primary);
-
   box-shadow: 0 0 0 3px rgba(255,122,122,.12);
 }
 
@@ -404,23 +346,17 @@
   display: flex;
   justify-content: flex-end;
   gap: 8px;
-
   margin-top: 10px;
 }
 
 .priority-create,
 .cancel-priority{
   border: none;
-
   padding: 8px 14px;
-
   border-radius: 8px;
-
   cursor: pointer;
-
   font-size: 13px;
   font-weight: 600;
-
   transition: .2s;
 }
 
@@ -431,15 +367,11 @@
 
 .priority-error{
   display: none;
-
   margin-top: 6px;
-
   font-size: 12px;
   font-weight: 500;
-
   color: #dc2626;
 }
-
 
 @media(max-width:600px){
   .task-description{
@@ -447,20 +379,16 @@
   }
 }
 
-
-
 .upload-box{
   border: 2px dashed #d1d5db;
   border-radius: 14px;
   padding: 16px;
   text-align: center;
   cursor: pointer;
-
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 140px;
-
   transition: 0.2s;
 }
 
@@ -544,16 +472,13 @@
   inset: 0;
   background: rgba(0,0,0,0.35);
   backdrop-filter: blur(4px);
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   opacity: 0;
   pointer-events: none;
   transition: 0.25s ease;
   z-index: 1000;
-
   padding: 16px;
 }
 

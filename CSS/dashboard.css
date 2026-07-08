@@ -115,7 +115,7 @@ body[data-page="dashboard"] .grid-right-area{
 }
 
 .todo-card:hover{
-  transform: translateY(-6px);
+  transform: translateY(-1px);
   box-shadow: 0 12px 30px rgba(0,0,0,0.1);
 }
 
@@ -160,6 +160,108 @@ body[data-page="dashboard"] .grid-right-area{
   border-radius: 12px;
   width: 100%;
   text-align: center;
+}
+
+.card-popup{
+    position:absolute;
+    top:20px;
+    right:0;
+    min-width:170px;
+    background:#fff;
+    border:1px solid #ececec;
+    border-radius:14px;
+    padding:8px;
+    box-shadow:0 16px 36px rgba(0,0,0,.12);
+    opacity:0;
+    visibility:hidden;
+    transform:
+        translateY(8px)
+        scale(.96);
+    transition:
+        opacity .18s ease,
+        transform .18s ease,
+        visibility .18s;
+    z-index:100;
+}
+
+.card-popup.active{
+    opacity:1;
+    visibility:visible;
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+.card-actions{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    margin:0;
+    padding:0;
+}
+
+.card-action{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:11px 14px;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    transition:.2s;
+
+    color:#444;
+}
+
+.card-action+.card-action{
+
+    border-top:1px solid #f3f3f3;
+}
+
+.card-action i{
+    width:16px;
+    font-size:13px;
+}
+
+.card-action span{
+
+    font-size:14px;
+
+    font-weight:600;
+}
+
+.card-action.edit{
+
+     color:#dc2626;
+}
+.card-action.edit:hover{
+
+    background:#fff5f5;
+
+    color:#ff5b5b;
+}
+
+.card-action.edit:hover{
+
+    background:#eff6ff;
+}
+
+.card-action.delete{
+
+    color:#d33;
+}
+
+.card-action.delete:hover{
+
+    background:#fff2f2;
 }
 
 .card-popup li:hover{
@@ -351,6 +453,15 @@ background-color: rgb(234, 228, 228);
 .complete-tasks-section .img-card{
   width: 50px;
   height: 50px;
+}
+
+.todo-card.completing{
+
+    opacity:0;
+
+    transform:translateX(40px) scale(.96);
+
+    transition:.25s ease;
 }
 
 @media (max-width:1200px){
@@ -698,4 +809,23 @@ body[data-page="dashboard"] .grid-right-area{
     outline:none;
 
     box-shadow: 0 0 0 4px rgba(255,122,122,.18);
+}
+
+.actions{
+
+    width:32px;
+    height:32px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:10px;
+
+    transition:.2s;
+}
+
+.actions:hover{
+
+    background:#f8f8f8;
 }

@@ -95,12 +95,21 @@ function renderTodos(activeTodos) {
       <div class="card-header">
              <div class="actions">
                <i class="fa-solid fa-ellipsis icon"></i>
-              <div class="card-popup">
-                <ul class="card-actions">
-                  <li class="card-action delete">Delete</li>
-                  <li class="card-action edit">Edit</li>
-                </ul>
-              </div>
+             <div class="card-popup">
+    <ul class="card-actions">
+
+        <li class="card-action edit">
+            <i class="fa-solid fa-pen"></i>
+            <span>Edit Task</span>
+        </li>
+
+        <li class="card-action delete">
+            <i class="fa-solid fa-trash"></i>
+            <span>Delete Task</span>
+        </li>
+
+    </ul>
+</div>
              </div>
       </div>
       <div class="task-card">
@@ -178,11 +187,20 @@ function renderTodos(activeTodos) {
              <div class="actions">
                <i class="fa-solid fa-ellipsis icon"></i>
               <div class="card-popup">
-                <ul class="card-actions">
-                  <li class="card-action delete">Delete</li>
-                  <li class="card-action edit">Edit</li>
-                </ul>
-              </div>
+    <ul class="card-actions">
+
+        <li class="card-action edit">
+            <i class="fa-solid fa-pen"></i>
+            <span>Edit Task</span>
+        </li>
+
+        <li class="card-action delete">
+            <i class="fa-solid fa-trash"></i>
+            <span>Delete Task</span>
+        </li>
+
+    </ul>
+</div>
              </div>
       </div>
       <div class="task-card">
@@ -336,9 +354,19 @@ todoCardContainer.addEventListener("change", (e) => {
   if(todo){
     todo.completed = e.target.checked
   }
+
+  const card = e.target.closest(".todo-card");
+
+card.classList.add("completing");
+
+setTimeout(() => {
+
+    saveTodos(todos);
+    rerenderPage();
+
+},250);
   
-  saveTodos(todos);
-  rerenderPage()
+ 
 });
 
 form.addEventListener("input",() => {
