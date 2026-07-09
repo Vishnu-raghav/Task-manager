@@ -68,7 +68,6 @@ function showImage(file){
   reader.readAsDataURL(file);
 }
 
-
 export function resetImagePreview() {
   previewImg.src = "";
   previewImg.style.display = "none";

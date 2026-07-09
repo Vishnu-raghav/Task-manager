@@ -164,7 +164,7 @@ body[data-page="dashboard"] .grid-right-area{
 
 .card-popup{
     position:absolute;
-    top:20px;
+    top:32px;
     right:0;
     min-width:170px;
     background:#fff;
@@ -201,28 +201,18 @@ body[data-page="dashboard"] .grid-right-area{
 }
 
 .card-action{
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
-
     padding:11px 14px;
-
     cursor:pointer;
-
     font-size:14px;
-
     font-weight:500;
-
     transition:.2s;
-
     color:#444;
 }
 
 .card-action+.card-action{
-
     border-top:1px solid #f3f3f3;
 }
 
@@ -232,20 +222,15 @@ body[data-page="dashboard"] .grid-right-area{
 }
 
 .card-action span{
-
     font-size:14px;
-
     font-weight:600;
 }
 
 .card-action.edit{
-
-     color:#dc2626;
+  color:#dc2626;
 }
 .card-action.edit:hover{
-
     background:#fff5f5;
-
     color:#ff5b5b;
 }
 
@@ -315,7 +300,6 @@ background-color: rgb(234, 228, 228);
 .img-card{
   width: 120px;
   height: 80px;
-
   border-radius: 12px;
   overflow: hidden;
   flex-shrink: 0;

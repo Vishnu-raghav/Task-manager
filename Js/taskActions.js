@@ -46,7 +46,7 @@ export function openEditTask(id, {
   };
 
   modalHeading.innerText = "Edit Task";
-  submitBtn.innerText = "Update Task";
+  submitBtn.innerHTML = `Update Task`;
   submitBtn.disabled = true;
 
   modal.classList.add("active");

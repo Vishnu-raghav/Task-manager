@@ -168,6 +168,8 @@ function renderTaskList(todos) {
   } else {
     showDetails();
   }
+
+ 
 }
 
 function showDetails(id) {
@@ -193,44 +195,57 @@ function showDetails(id) {
 
   const priorityObj = priority.find((p) => p.id === Number(todo.priority)) 
 
-  detailContainer.innerHTML = `
+ detailContainer.innerHTML = `
+<div class="task-detail-card">
+
   <div class="todo-detail">
   ${
     todo.image ? `
-       <div class="img-card large">
+    <div class="img-card large">
       <img
         class="task-img"
         src="${todo.image}"
         alt="img"
       />
     </div>
-      ` : ""
-     }
+    ` : ""
+  }
 
     <div class="todo-progress-detail">
+
       <h2 class="task-title">${todo.title}</h2>
 
       <div class="meta">
+
         <span
-  class="priority-pill"
-  style="
-    background:${priorityObj?.color || "#6b7280"};
-    color:white;
-  "
->
-  ${priorityObj?.name || "N/A"}
-</span>
-        <span class="badge status ${statusClass}">${statusText}</span>
+          class="priority-pill"
+          style="
+            background:${priorityObj?.color || "#6b7280"};
+            color:white;
+          "
+        >
+          ${priorityObj?.name || "N/A"}
+        </span>
+
+        <span class="badge status ${statusClass}">
+          ${statusText}
+        </span>
+
       </div>
 
       <p class="date">
         <i class="fa-regular fa-calendar"></i>
-        Due on <span>${todo.dueDate || "N/A"}</span>
+        Due on
+        <span>${todo.dueDate || "N/A"}</span>
       </p>
+
     </div>
+
   </div>
 
+
   <div class="task-full-detail-section">
+
     <div class="detail-row">
       <p class="label">Title</p>
       <p class="value">${todo.title}</p>
@@ -238,31 +253,40 @@ function showDetails(id) {
 
     <div class="detail-row">
       <p class="label">Description</p>
-      <p class="value">
-        ${todo.desc}
-      </p>
+      <p class="value">${todo.desc}</p>
     </div>
 
     <div class="detail-row">
       <p class="label">Category</p>
-      <p class="value">${categoryObj ? categoryObj.name : "General"}</p>
+      <p class="value">
+        ${categoryObj ? categoryObj.name : "General"}
+      </p>
     </div>
 
     <div class="detail-row">
       <p class="label">Due Date</p>
       <p class="value">${todo.dueDate || "N/A"}</p>
     </div>
+
   </div>
 
+
   <div class="task-actions">
-    <button class="edit-btn edit"  data-id="${todo.id}">
-      <i class="fa-solid fa-pen"></i> 
+
+    <button class="edit-btn edit" data-id="${todo.id}">
+      <i class="fa-solid fa-pen"></i>
+      Edit
     </button>
+
     <button class="delete-btn" data-id="${todo.id}">
       <i class="fa-solid fa-trash"></i>
+      Delete
     </button>
+
   </div>
-  `;
+
+</div>
+`;
 
 }
 

@@ -292,7 +292,7 @@ addTaskBtn.addEventListener("click", () => {
   modalSubmitBtn.disabled = true;
   
   modalHeading.innerText = "Add New Task";
-  modalSubmitBtn.innerText = "Done";
+  modalSubmitBtn.innerHTML = `Create Task`;
   
   todoModal.classList.add("active");
 });
