@@ -78,16 +78,17 @@ searchDropdown.addEventListener("click", (e) => {
   const task = e.target.closest(".search-output")
   if(task){
     const id = Number(task.dataset.id)
-    saveTaskId(id)
     routeTask(id)
     return
   }
 
 })
 
-function routeTask(id){
-  window.location.href = "MyTask.html";
-  searchDropdown.classList.remove("show")
-  searchDropdown.innerHTML = ""
+function routeTask(id) {
+  saveTaskId(id);
 
+  searchDropdown.classList.remove("show");
+  searchDropdown.innerHTML = "";
+
+  window.location.href = "/pages/MyTask.html";
 }
