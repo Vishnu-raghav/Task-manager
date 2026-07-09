@@ -6,6 +6,10 @@ rerenderPage();
 export function rerenderPage() {
   const page = document.body.dataset.page;
 
+  if (page === "dashboard" || page === "myTask" || page === "category"){
+    import("./todayDate.js");
+  }
+
   if (page === "dashboard" || page === "myTask"){
   import("./modal.js");
   import("./priority.js")

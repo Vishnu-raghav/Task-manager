@@ -41,10 +41,11 @@ setTimeout(() => {
   }
 });
 
-mobileBtn.addEventListener("click", () => {
+mobileBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
    if (!isMobile()) return;
 
-    sidebar.classList.remove("close");   // <-- ye line add karo
+    sidebar.classList.remove("close");   
 
     sidebar.classList.toggle("open");
 });
@@ -84,3 +85,13 @@ document.querySelectorAll(".sidebar a").forEach(link => {
 });
 
 
+document.addEventListener("click", (e) => {
+    if (!isMobile()) return;
+
+    if (!sidebar.classList.contains("open")) return;
+
+    if (sidebar.contains(e.target)) return;
+
+    sidebar.classList.remove("open");
+
+});
