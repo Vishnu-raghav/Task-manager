@@ -1,5 +1,5 @@
-import { getTodos, saveTodos } from "./storage.js";
-import { rerenderPage } from "./app.js";
+import { getTodos, saveTodos } from "../services/storage.js";
+import { rerenderPage } from "../app.js";
 
 let draggedTaskId = null;
 let isInitialized = false;

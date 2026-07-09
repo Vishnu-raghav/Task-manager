@@ -1,5 +1,5 @@
-import { isFormValid, isEditChanged } from "./formUtils.js";
-import { getEditState, clearEditState } from "./taskActions.js";
+import { isFormValid, isEditChanged } from "../features/formUtils.js";
+import { getEditState, clearEditState } from "../features/taskActions.js";
 import {setImage} from "../utils/imageState.js"
 
 const form = document.getElementById("todoForm");

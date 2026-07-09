@@ -1,9 +1,9 @@
-import { initializeCategories,getCategories, getTodos, getPriorities } from "./storage.js";
-import { createCategory, deleteCategory,updateCategory } from "./taskcrud.js";
-import {openConfirmModal} from "./actionsConfirm.js"
-import { openEditCategory, getEditState, clearEditState } from "./taskActions.js";
-import { initForm,updateSubmitButtonState } from "./formUtils.js";
-import { initDragAndDrop } from "./dragDrop.js";
+import { initializeCategories,getCategories, getTodos, getPriorities } from "../services/storage.js";
+import { createCategory, deleteCategory,updateCategory } from "../services/taskcrud.js";
+import {openConfirmModal} from "../components/actionsConfirm.js"
+import { openEditCategory, getEditState, clearEditState } from "../features/taskActions.js";
+import { initForm,updateSubmitButtonState } from "../features/formUtils.js";
+import { initDragAndDrop } from "../features/dragDrop.js";
 
 const categorySection = document.getElementById("categoryCardSection");
 const rightPanel = document.querySelector(".grid-right-area");

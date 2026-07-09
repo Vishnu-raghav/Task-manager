@@ -1,4 +1,4 @@
-import { getTodos, getCategories, saveTaskId } from "./storage.js";
+import { getTodos, getCategories, saveTaskId } from "../services/storage.js";
 
 const searchDropdown = document.getElementById("todoDropdown")
 const searchBar = document.getElementById("task-search-input")

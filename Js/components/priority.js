@@ -1,5 +1,5 @@
-import {createPriority, deletePriority} from "./taskcrud.js"
-import { getPriorities, savePriorities } from "./storage.js";
+import {createPriority, deletePriority} from "../services/taskcrud.js"
+import { getPriorities, savePriorities } from "../services/storage.js";
 
 const priorityContainer = document.getElementById("task-priority") 
 const dropdown = document.getElementById("priorityDropdown");

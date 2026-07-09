@@ -1,4 +1,4 @@
-import { rerenderPage } from "./app.js";
+import { rerenderPage } from "../app.js";
 import { 
   getPriorities,
   getTodos,
@@ -6,23 +6,23 @@ import {
   getCategories,
   initializePriorities,
   getFilterState
-} from "./storage.js";
+} from "../services/storage.js";
 
-import { openEditTask, clearEditState, getEditState } from "./taskActions.js";
-import {initForm,updateSubmitButtonState} from "./formUtils.js"
-import {openConfirmModal} from "./actionsConfirm.js"
+import { openEditTask, clearEditState, getEditState } from "../features/taskActions.js";
+import {initForm,updateSubmitButtonState} from "../features/formUtils.js"
+import {openConfirmModal} from "../components/actionsConfirm.js"
 
 import {
   createTodo as createTodoService,
   updateTodo as updateTodoService,
   deleteTodo as deleteTodoService
-} from "./taskcrud.js";
+} from "../services/taskcrud.js";
 
 import {populateOptions as populateCategoryOptions,} from "../utils/populateOptions.js"
-import { filterTodos } from "./filter.js";
-import {resetPriorityDropdown} from "./priority.js"
+import { filterTodos } from "../components/filter.js";
+import {resetPriorityDropdown} from "../components/priority.js"
 import { clearImage } from "../utils/imageState.js";
-import  {resetImagePreview} from "./modal.js"
+import  {resetImagePreview} from "../components/modal.js"
 
 
 const form = document.getElementById("todoForm");

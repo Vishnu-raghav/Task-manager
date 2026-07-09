@@ -1,4 +1,5 @@
-import {getPriorities, getTodos,savePriorities,saveTodos, getCategories, saveCategories} from "./storage.js"
+import {getPriorities, getTodos,savePriorities,saveTodos, getCategories, saveCategories}
+ from "../services/storage.js"
 
 
 export function createTodo(data) {

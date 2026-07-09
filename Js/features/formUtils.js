@@ -1,4 +1,4 @@
-import { getEditState } from "./taskActions.js";
+import { getEditState } from "../features/taskActions.js";
 import {getImage, clearImage} from "../utils/imageState.js"
 const dropdown = document.querySelector(".custom-dropdown");
 

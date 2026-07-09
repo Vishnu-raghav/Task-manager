@@ -1,5 +1,5 @@
 import { setImage } from "../utils/imageState.js";
-import { getTodos, getCategories } from "./storage.js";
+import { getTodos, getCategories } from "../services/storage.js";
 const previewImg = document.getElementById("previewImg");
 const uploadContent = document.querySelector(".upload-content");
 const dropdown = document.querySelector(".custom-dropdown");

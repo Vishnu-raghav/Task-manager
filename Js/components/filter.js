@@ -1,4 +1,4 @@
-import { rerenderPage } from "./app.js";
+import { rerenderPage } from "../app.js";
 import {
   getCategories,
   getPriorities,
@@ -6,7 +6,7 @@ import {
   saveFilterState,
   clearFilterState,
   getTodos,
-} from "./storage.js";
+} from "../services/storage.js";
 
 const filterModal = document.getElementById("filterPanel");
 const taskFilterContainer = document.querySelector(".task-filter");

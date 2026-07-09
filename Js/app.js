@@ -1,4 +1,4 @@
-import "./sidebar.js";
+import "./components/sidebar.js";
 
 
 rerenderPage();
@@ -7,33 +7,33 @@ export function rerenderPage() {
   const page = document.body.dataset.page;
 
   if (page === "dashboard" || page === "myTask" || page === "category"){
-    import("./todayDate.js");
+    import("./utils/todayDate.js");
   }
 
   if (page === "dashboard" || page === "myTask"){
-  import("./modal.js");
-  import("./priority.js")
-  import("./filter.js")
-  import("./search.js")
+  import("./components/modal.js");
+  import("./components/priority.js")
+  import("./components/filter.js")
+  import("./components/search.js")
   }
 
   if (page === "dashboard"){
-    import("./dashboard.js").then(m => {
+    import("./pages/dashboard.js").then(m => {
       m.renderDashboard()
     });
   }
 
   if (page === "myTask"){
-    import("./myTask.js").then(m => {
+    import("./pages/myTask.js").then(m => {
       m.renderMyTaskDashboard();
     });
   }
 
   if (page === "category"){
-    import("./search.js")
+    import("./components/search.js")
 
     
-  import("./category.js").then(m => {
+  import("./pages/category.js").then(m => {
     m.renderCategories();
   });
  }

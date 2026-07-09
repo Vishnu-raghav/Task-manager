@@ -1,19 +1,21 @@
-import { getCategories, getTodos , getPriorities, getFilterState, getTaskId, clearTaskId} from "./storage.js";
-import { clearEditState, getEditState ,openEditTask } from "./taskActions.js";
-import {initForm,updateSubmitButtonState} from "./formUtils.js"
-import {openConfirmModal} from "./actionsConfirm.js"
+import 
+{ getCategories, getTodos , getPriorities, getFilterState, getTaskId, clearTaskId }
+from "../services/storage.js";
+import { clearEditState, getEditState ,openEditTask } from "../features/taskActions.js";
+import {initForm,updateSubmitButtonState} from "../features/formUtils.js"
+import {openConfirmModal} from "../components/actionsConfirm.js"
 
 import {
   deleteTodo as deleteTodoService,
   createTodo as createTodoService,
   updateTodo as updateTodoService,
-} from "./taskcrud.js";
+} from "../services/taskcrud.js";
 
 import {populateOptions as populateCategoryOptions} from "../utils/populateOptions.js"
-import { filterTodos } from "./filter.js";
-import {resetPriorityDropdown} from "./priority.js"
+import { filterTodos } from "../components/filter.js";
+import {resetPriorityDropdown} from "../components/priority.js"
 import { clearImage } from "../utils/imageState.js";
-import  {resetImagePreview} from "./modal.js"
+import  {resetImagePreview} from "../components/modal.js"
 
 const rightPanel = document.querySelector(".grid-right-area");
 const listSection = document.querySelector(".task-card-section");
