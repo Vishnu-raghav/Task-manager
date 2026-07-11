@@ -23,7 +23,6 @@ body[data-page="myTask"] .grid-left-area{
     box-shadow:0 10px 30px rgba(0,0,0,.06);
 }
 
-
 body[data-page="myTask"] .grid-right-area{
   display: flex;
   flex-direction: column;
@@ -108,7 +107,6 @@ body[data-page="myTask"] .grid-container{
   color: #b91c1c;
 }
 
-
 .priority-pill{
   display: inline-flex;
   align-items: center;
@@ -159,13 +157,16 @@ body[data-page="myTask"] .grid-container{
 }
 
 .task-list-header{
-  display: flex;
-  gap: 14px;
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  min-width:0; 
 }
 
 .task-list-content{
-  flex: 1;
-  min-width: 0;
+  flex:1;
+  min-width:0;
+  max-width:100%;
 }
 
 .task-list-title{
@@ -174,6 +175,12 @@ body[data-page="myTask"] .grid-container{
   font-weight: 700;
   color: #111827;
   margin-bottom: 6px;
+   overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow-wrap:anywhere;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
 }
 
 .task-list-desc{
@@ -186,6 +193,9 @@ body[data-page="myTask"] .grid-container{
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+    overflow-wrap:anywhere;
+  word-break:break-word;
+  min-width: 0;
 }
 
 .task-meta{
