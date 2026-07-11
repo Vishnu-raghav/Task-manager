@@ -3,8 +3,7 @@ import { getTodos, getCategories } from "../services/storage.js";
 const previewImg = document.getElementById("previewImg");
 const uploadContent = document.querySelector(".upload-content");
 const dropdown = document.querySelector(".custom-dropdown");
-
-
+const removeImageBtn = document.getElementById("removeImageBtn");
 
 let editTodoId = null;
 let originalTodoData = null;
@@ -31,6 +30,7 @@ export function openEditTask(id, {
 
   if(todo.image){
     previewImg.src = todo.image;
+    removeImageBtn.style.display = "flex";
     previewImg.style.display = "block";
     uploadContent.style.display = "none";
     setImage(todo.image)

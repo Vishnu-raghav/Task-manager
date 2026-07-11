@@ -312,11 +312,60 @@ background-color: rgb(234, 228, 228);
   display: block;
 }
 
-.task-Progress{
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-left: 34px;
+.task-meta{
+
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+
+    gap:10px;
+
+    margin-top:14px;
+
+    padding-top:14px;
+
+    border-top:1px solid #f1f1f1;
+
+}
+
+
+.task-meta-row{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:8px;
+
+    padding:8px 10px;
+
+    background:#fafafa;
+
+    border-radius:10px;
+
+}
+
+.task-meta-label{
+
+    font-size:12px;
+
+    font-weight:600;
+
+    color:#666;
+
+}
+
+.task-meta-value{
+
+    font-size:12px;
+
+    font-weight:600;
+
+    color:#222;
+
+    text-align:right;
+
 }
 
 .progress-key{
@@ -503,82 +552,105 @@ body[data-page="dashboard"] .grid-right-area{
 }
 
 .task-header{
-    flex-direction:column;
-    align-items:stretch;
-    gap:14px;
+flex-direction:column;
+align-items:stretch;
+gap:14px;
 }
 
 .task-header-controls{
-
-    width:100%;
-
-    justify-content:flex-end;
-
-    gap:10px;
+width:100%;
+justify-content:flex-end;
+gap:10px;
 }
 
 .header-task-actions{
-
-    position:relative;
-
-    flex:0 0 auto;
+position:relative;
+flex:0 0 auto;
 }
 
 .Add-Task{
-
-    flex:none;
+flex:none;
 }
 
 .task-card{
-    flex-direction:column;
+flex-direction:row;
+align-items:flex-start;
 }
 
 .img-card{
-    width:100%;
-    height:180px;
+    width:90px;
+    height:90px;
+    flex-shrink:0;
 }
 
-.task-Progress{
-    margin-left:0;
+.task-meta{
+  gap:8px;
+}
+
+.task-meta-row{
+  padding:8px;
 }
 
 .todo-card{
     padding:14px;
 }
 
-.complete-tasks-section .task-card{
-    flex-direction:column;
-    align-items:flex-start;
-}
 
-.complete-tasks-section .img-card{
-    width:100%;
-    height:170px;
-}
-
-.complete-tasks-section .task-checkbox{
-    margin-bottom:8px;
-}
-
-.complete-tasks-section .todo-card{
-    padding:12px;
-}
 
 .card-popup{
     right: 10px;
 }
 
+
+.completed-card{
+
+gap:10px;
+
 }
 
-.complete-tasks-section .task-details{
-    width:100%;
+.completed-img{
+width:42px;
+height:42px;
 }
 
-.complete-tasks-section .task-details p{
-    overflow-wrap:anywhere;
+.completed-content h4{
+font-size:13px;
 }
+
+.completed-content p{
+font-size:11px;
+}
+}
+
+
 
 @media (max-width:480px){
+
+.completed-card{
+
+gap:8px;
+
+}
+
+.completed-img{
+
+width:38px;
+
+height:38px;
+
+}
+
+.completed-content h4{
+
+font-size:12px;
+
+}
+
+.completed-content p{
+
+display:none;
+
+}
 
 .home{
     padding:10px;
@@ -599,8 +671,15 @@ body[data-page="dashboard"] .grid-right-area{
 }
 
 .task-meta{
-    flex-direction:column;
-    gap:8px;
+
+    grid-template-columns:1fr;
+
+}
+
+.task-meta-row{
+
+    padding:10px 12px;
+
 }
 
 .progress-key{
@@ -612,25 +691,23 @@ body[data-page="dashboard"] .grid-right-area{
 }
 
 .header-task-actions{
-
-    flex:none;
+  flex:none;
 }
 
 .Add-Task{
-
-    flex:none;
+  flex:none;
 }
 
 .complete-tasks-section .task-details span{
-    font-size:13px;
+  font-size:13px;
 }
 
 .complete-tasks-section .task-details p{
-    font-size:12px;
+  font-size:12px;
 }
 
 .complete-tasks-section .img-card{
-    height:140px;
+  height:140px;
 }
 
 .card-popup{
@@ -812,4 +889,78 @@ body[data-page="dashboard"] .grid-right-area{
 .actions:hover{
 
     background:#f8f8f8;
+}
+
+.completed-card{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+min-height:54px;
+
+}
+
+.completed-content{
+
+flex:1;
+
+min-width:0;
+
+}
+
+.completed-content h4{
+
+margin:0;
+
+font-size:14px;
+
+font-weight:600;
+
+color:#64748b;
+
+text-decoration:line-through;
+
+overflow:hidden;
+
+white-space:nowrap;
+
+text-overflow:ellipsis;
+
+}
+
+.completed-img{
+
+width:48px;
+
+height:48px;
+
+border-radius:10px;
+
+overflow:hidden;
+
+flex-shrink:0;
+
+}
+
+.completed-img img{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+display:block;
+
+}
+
+.completed-card .actions{
+
+margin-left:auto;
+
+flex-shrink:0;
+
 }

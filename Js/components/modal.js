@@ -1,22 +1,28 @@
 import { isFormValid, isEditChanged } from "../features/formUtils.js";
 import { getEditState, clearEditState } from "../features/taskActions.js";
-import {setImage} from "../utils/imageState.js"
+import {setImage, clearImage} from "../utils/imageState.js"
 
 const form = document.getElementById("todoForm");
 const submitBtn = document.querySelector('button[type="submit"]');
 const todoModal = document.getElementById("todoModal");
 const closeBtns = document.querySelectorAll(".close-modal");
 
+
 closeBtns.forEach(btn => {
   btn.addEventListener("click", () => {
-    clearEditState()
+
+    clearEditState();
+
     todoModal.classList.remove("active");
+
+    document.body.classList.remove("modal-open");
+
   });
 });
-
 const uploadBox = document.getElementById("uploadBox");
 const fileInput = document.getElementById("modal-file-input");
 const previewImg = document.getElementById("previewImg");
+const removeImageBtn = document.getElementById("removeImageBtn");
 const browseBtn = document.querySelector(".browse-btn");
 const uploadContent = document.querySelector(".upload-content");
 
@@ -64,6 +70,7 @@ function showImage(file){
     previewImg.src = reader.result;
     previewImg.style.display = "block";
     uploadContent.style.display = "none";
+    removeImageBtn.style.display = "flex";
   };
   reader.readAsDataURL(file);
 }
@@ -72,5 +79,25 @@ export function resetImagePreview() {
   previewImg.src = "";
   previewImg.style.display = "none";
   uploadContent.style.display = "block";
+  removeImageBtn.style.display = "none";
   fileInput.value = "";
 }
+
+
+removeImageBtn.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
+
+    clearImage();
+
+    previewImg.src="";
+
+    previewImg.style.display="none";
+
+    uploadContent.style.display="flex";
+
+    removeImageBtn.style.display="none";
+
+    fileInput.value="";
+
+});

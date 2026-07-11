@@ -17,6 +17,20 @@ initializeCategories()
 
 let activeCategoryId = null;
 
+function formatDate(dateString){
+
+    if(!dateString){
+        return "No due date";
+    }
+
+    return new Date(dateString).toLocaleDateString("en-GB",{
+        day:"numeric",
+        month:"short",
+        year:"numeric"
+    });
+
+}
+
 export function renderCategories() {
   const todos = getTodos();
   const category = getCategories()
@@ -32,10 +46,19 @@ export function renderCategories() {
     const completed = tasks.filter(t => t.completed).length;
     const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
     const isSelected = cat.id === activeCategoryId
+    console.log(tasks)
+
+    const latestTask = tasks.reduce((latest, current) => {
+    if (!latest) return current;
+
+    return new Date(current.createdAt) > new Date(latest.createdAt)
+        ? current
+        : latest;
+    }, null);
    
-    const lastTask = tasks.length
-      ? tasks[tasks.length - 1].dueDate || "N/A"
-      : "No tasks"; 
+    const lastTask = latestTask
+    ? formatDate(latestTask.createdAt)
+    : "No tasks";  
 
     const card = document.createElement("div");
     card.className = isSelected ? "category-card active" : "category-card";
@@ -156,7 +179,7 @@ function showCategoryTasks(categoryID) {
      <div class="category-task-footer">
       <span>
         <i class="fa-regular fa-calendar"></i>
-        ${task.dueDate || "No Due Date"}
+       ${formatDate(task.dueDate)}
       </span>
     </div>
 
@@ -227,10 +250,12 @@ categorySection.addEventListener("click", (e) => {
 
 createCategoryButton.addEventListener("click", () => {
     form.reset();
+    clearEditState();
+
     modalSubmitBtn.disabled = true
-    
     modalHeading.innerText = "Create Category";
     modalSubmitBtn.innerText = "Create";
+    document.body.classList.add("modal-open");
     todoModal.classList.add("active");
 })
 

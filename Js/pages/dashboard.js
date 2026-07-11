@@ -36,6 +36,8 @@ const todoModal = document.getElementById("todoModal");
 const modalHeading = todoModal.querySelector(".modal-header h4");
 const modalSubmitBtn = todoModal.querySelector('button[type="submit"]');
 const select = document.getElementById("task-category");
+const filterModal = document.getElementById("filterPanel");
+
 
 
 initializePriorities()
@@ -45,6 +47,7 @@ if (select) {
     placeholderText: "Select Category"
   });
 }
+
 
 function formatDate(dateString){
 
@@ -129,32 +132,46 @@ function renderTodos(activeTodos) {
           </div>` : ""}
       </div>
 
-      <div class="task-Progress">
-        <p class="progress-key">Category: <span class="progress-value">${categoryName}</span></p>
-        <span class="meta-item">
-        Priority:
-         <span
-           class="progress-value priority-pill"
-           style="
-             background:${priorityObj?.color || '#6b7280'};
-             color:white;
-           "
-         >
-           ${priorityName}
-         </span>
-        
-        
-        </span>
-       
-        
-          <span class="meta-item">
-          Status:<span class="badge status ${statusClass}">${statusText}</span>
-          </span>
+      <div class="task-meta">
 
-  <span class="meta-item">
-    Due:
-    <b>${formatDate(task.dueDate)}</b>
-  </span>      </div>      
+  <div class="task-meta-row">
+    <span class="task-meta-label">Category</span>
+    <span class="task-meta-value">
+      ${categoryName}
+    </span>
+  </div>
+
+  <div class="task-meta-row">
+    <span class="task-meta-label">Priority</span>
+
+    <span
+      class="priority-pill"
+      style="
+      background:${priorityObj?.color || "#6b7280"};
+      color:#fff;
+      "
+    >
+      ${priorityName}
+    </span>
+  </div>
+
+  <div class="task-meta-row">
+    <span class="task-meta-label">Status</span>
+
+    <span class="badge status ${statusClass}">
+      ${statusText}
+    </span>
+  </div>
+
+  <div class="task-meta-row">
+    <span class="task-meta-label">Due</span>
+
+    <span class="task-meta-value">
+      ${formatDate(task.dueDate)}
+    </span>
+  </div>
+
+</div>      
     `;
 
     todoCardSection.appendChild(card);
@@ -182,42 +199,46 @@ function renderTodos(activeTodos) {
     card.className = "todo-card";
     card.dataset.id = task.id
 
-    card.innerHTML = `
-      <div class="card-header">
-             <div class="actions">
-               <i class="fa-solid fa-ellipsis icon"></i>
-              <div class="card-popup">
-    <ul class="card-actions">
+   card.innerHTML = `
+<div class="completed-card">
 
-        <li class="card-action edit">
-            <i class="fa-solid fa-pen"></i>
-            <span>Edit Task</span>
-        </li>
+    <div class="task-checkbox">
+        <input type="checkbox" data-id="${task.id}" checked>
+    </div>
 
-        <li class="card-action delete">
-            <i class="fa-solid fa-trash"></i>
-            <span>Delete Task</span>
-        </li>
+    <div class="completed-content">
+        <h4>${task.title}</h4>
+    </div>
 
-    </ul>
+    ${
+      task.image
+      ?`
+      <div class="completed-img">
+          <img src="${task.image}" alt="">
+      </div>
+      `
+      :""
+    }
+
+    <div class="actions">
+
+        <i class="fa-solid fa-ellipsis icon"></i>
+
+        <div class="card-popup">
+            <ul class="card-actions">
+
+                <li class="card-action delete">
+                    <i class="fa-solid fa-trash"></i>
+                    <span>Delete Task</span>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
 </div>
-             </div>
-      </div>
-      <div class="task-card">
-        <div class="task-checkbox">
-          <input type="checkbox" data-id="${task.id}" checked>
-        </div>
-        <div class="task-details">
-          <span>${task.title}</span>
-          <p>${task.desc}</p>
-        </div>
-
-        ${task.image ? `
-          <div class="img-card">
-            <img class="task-img" src="${task.image}" alt="img">
-          </div>` : ""}
-      </div>
-    `;
+`;
 
     completedTaskSection.appendChild(card);
   });
@@ -283,6 +304,7 @@ function updateProgressUI(todos) {
 }
 
 addTaskBtn.addEventListener("click", () => {
+  closeCardPopups();
   form.reset()
   clearEditState()
   clearImage()
@@ -293,8 +315,9 @@ addTaskBtn.addEventListener("click", () => {
   
   modalHeading.innerText = "Add New Task";
   modalSubmitBtn.innerHTML = `Create Task`;
-  
-  todoModal.classList.add("active");
+  filterModal.classList.remove("active");
+ document.body.classList.add("modal-open");
+ todoModal.classList.add("active");
 });
 
 initForm(form, {
@@ -306,7 +329,6 @@ initForm(form, {
 });
 
 todoCardContainer.addEventListener("click", (e) => {
-  
   const deleteBtn = e.target.closest(".delete")
   
   if(deleteBtn){
@@ -317,7 +339,6 @@ todoCardContainer.addEventListener("click", (e) => {
     deleteTodoHandle(id)
     return
   }
-  
   const editBtn = e.target.closest(".edit");
   if (editBtn){
     const card = editBtn.closest(".todo-card")
@@ -333,13 +354,39 @@ todoCardContainer.addEventListener("click", (e) => {
   const popup = actions.querySelector(".card-popup");
   if(!popup) return
 
-  popup.classList.toggle("active");
-  return
+  const isOpen = popup.classList.contains("active");
+  
+  closeCardPopups()
+  
+  if(!isOpen){
+      popup.classList.add("active");
   }
-  
-  
-  
+}
 });
+
+document.addEventListener("click", (e) => {
+
+    if (e.target.closest(".actions")) return;
+
+   closeCardPopups()
+
+});
+
+window.addEventListener("scroll",()=>{
+    closeCardPopups();
+})
+
+window.addEventListener("resize",()=>{
+    closeCardPopups();
+})
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key==="Escape"){
+        closeCardPopups();
+    }
+
+})
 
 todoCardContainer.addEventListener("change", (e) => {
   if(!isDashboard) return
@@ -389,4 +436,14 @@ export function renderDashboard() {
   renderCompletedTodos(completedTodos);
   
   updateProgressUI(todos);
+}
+
+function closeCardPopups(){
+
+    document
+      .querySelectorAll(".card-popup.active")
+      .forEach(popup=>{
+          popup.classList.remove("active");
+      });
+
 }

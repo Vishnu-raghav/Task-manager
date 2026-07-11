@@ -38,7 +38,6 @@ export function updateTodo(editTodoId,data){
 
 }
 
-
 export function createCategory(data){
   const category = getCategories()
 

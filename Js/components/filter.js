@@ -15,9 +15,6 @@ const priorityList = document.getElementById("filterPriorityList");
 
 let selectedFilters = getFilterState();
 
-
-
-
 taskFilterContainer.addEventListener("click", (e) => {
   const taskFilterButton = e.target.closest("#filterBtn");
   const cancelButton = e.target.closest("#cancelFiltersBtn");
@@ -39,10 +36,8 @@ taskFilterContainer.addEventListener("click", (e) => {
   }
 
   if (applyButton) {
-
     saveFilterState(selectedFilters);
     filterModal.classList.remove("active");
-    
     rerenderPage()
     return;
   }
@@ -52,6 +47,26 @@ taskFilterContainer.addEventListener("click", (e) => {
     selectedFilters = getFilterState();   
     syncFilterUI();
     return;
+  }
+
+});
+
+document.addEventListener("click", (e) => {
+  if(taskFilterContainer.contains(e.target)) return
+  filterModal.classList.remove("active")
+})
+
+window.addEventListener("scroll", () => {
+  filterModal.classList.remove("active");
+});
+
+window.addEventListener("resize", () => {
+  filterModal.classList.remove("active");
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    filterModal.classList.remove("active");
   }
 });
 
@@ -81,11 +96,6 @@ taskFilterContainer.addEventListener("change", (e) => {
     return
   }
 });
-
-
-
-
-
 
 function syncFilterUI() {
   categoryList.innerHTML = "";

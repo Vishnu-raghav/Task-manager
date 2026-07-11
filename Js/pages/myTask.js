@@ -25,6 +25,8 @@ const todoModal = document.getElementById("todoModal");
 const modalHeading = todoModal.querySelector(".modal-header h4");
 const modalSubmitBtn = todoModal.querySelector('button[type="submit"]');
 const select = document.getElementById("task-category");
+const filterModal = document.getElementById("filterPanel");
+
 
 let activeTaskId = null;
 
@@ -238,7 +240,7 @@ function showDetails(id) {
       <p class="date">
         <i class="fa-regular fa-calendar"></i>
         Due on
-        <span>${todo.dueDate || "N/A"}</span>
+        <span>${formatDate(todo.dueDate)}</span>
       </p>
 
     </div>
@@ -267,7 +269,7 @@ function showDetails(id) {
 
     <div class="detail-row">
       <p class="label">Due Date</p>
-      <p class="value">${todo.dueDate || "N/A"}</p>
+      <p class="value">${formatDate(todo.dueDate)}</p>
     </div>
 
   </div>
@@ -359,7 +361,8 @@ addTaskBtn.addEventListener("click", () => {
   
   modalHeading.innerText = "Add New Task";
   modalSubmitBtn.innerText = "Done";
-  
+  filterModal.classList.remove("active");
+  document.body.classList.add("modal-open");
   todoModal.classList.add("active");
 });
 

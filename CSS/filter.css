@@ -5,19 +5,13 @@
 
 
 .task-filter-panel{
-
     position:absolute;
-
     top:calc(100% + 10px);
-
     right:0;
-
     display:none;
-
     width:360px;
     max-width:calc(100vw - 32px);
-
-    z-index:5000;
+    z-index:90;
 }
 
 .task-filter-panel.active{
@@ -272,13 +266,13 @@
 .task-filter-check input:checked + .task-filter-check-box::after{
   content: "";
   position: absolute;
-  left: 5px;
-  top: 2px;
+  left: 50%;
+  top: 50%;
   width: 4px;
   height: 8px;
   border: solid #fff;
   border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  transform: translate(-50%, -58%) rotate(45deg);
 }
 
 .task-filter-check:has(input:checked){
@@ -330,7 +324,6 @@
 
 
 
-
 @media (max-width: 700px){
   .task-filter-panel{
     right: 0;
@@ -343,7 +336,6 @@ max-width:calc(100vw - 48px);
     align-items: flex-start;
   }
 
-  
 
   .task-filter-panel-footer{
     flex-direction: column-reverse;
@@ -362,19 +354,12 @@ max-width:calc(100vw - 48px);
     }
 
     .task-filter-panel{
-
         position:absolute;
-
         top:calc(100% + 12px);
-
         left:50%;
-
         right:auto;
-
         transform:translateX(-50%);
-
         width:min(300px, calc(100vw - 48px));
-
         max-height:60vh;
     }
 
@@ -431,10 +416,9 @@ max-width:calc(100vw - 48px);
   }
 
   .task-filter-chip span{
-    min-height: 30px;
-    padding: 0 10px;
-
-    font-size: 11px;
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 12px;
     font-weight: 600;
   }
 
@@ -443,15 +427,15 @@ max-width:calc(100vw - 48px);
   }
 
   .task-filter-check{
-    padding: 8px 10px;
+    padding: 10px 12px;
     gap: 8px;
-
+    min-height: 46px;
     border-radius: 10px;
   }
 
   .task-filter-check-box{
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
   }
 
   .task-filter-check-label{

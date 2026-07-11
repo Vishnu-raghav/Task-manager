@@ -54,15 +54,17 @@ export function initForm(form, config = {}) {
     {
       ...formData,
       priority: dropdown?.dataset.value || "",
-      image: getImage()
+      image: getImage(),
+      
     } : formData
-   
     
    if (editTodoId !== null) {
+     data.updatedAt = new Date().toISOString();
      updateFn(editTodoId, data);
    } else if (editCategoryId !== null) {
      updateFn(editCategoryId, data);
    } else {
+     data.createdAt = new Date().toISOString();
      createFn(data);
    }
 
