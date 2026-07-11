@@ -33,7 +33,7 @@ transition:
     padding .3s ease,
     transform .35s ease;
   overflow:visible;
-  z-index:1000;
+  z-index:999;
 }
 
 .sidebar.close{

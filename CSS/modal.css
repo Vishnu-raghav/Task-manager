@@ -9,7 +9,7 @@
   opacity: 0;
   pointer-events: none;
   transition: 0.25s ease;
-  z-index: 999;
+  z-index: 1000;
   padding: 16px;
 }
 
