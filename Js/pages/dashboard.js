@@ -103,12 +103,12 @@ function renderTodos(activeTodos) {
 
         <li class="card-action edit">
             <i class="fa-solid fa-pen"></i>
-            <span>Edit Task</span>
+            <span>Edit</span>
         </li>
 
         <li class="card-action delete">
             <i class="fa-solid fa-trash"></i>
-            <span>Delete Task</span>
+            <span>Delete</span>
         </li>
 
     </ul>
@@ -135,14 +135,14 @@ function renderTodos(activeTodos) {
       <div class="task-meta">
 
   <div class="task-meta-row">
-    <span class="task-meta-label">Category</span>
+    <span class="task-meta-label">Category:</span>
     <span class="task-meta-value">
       ${categoryName}
     </span>
   </div>
 
   <div class="task-meta-row">
-    <span class="task-meta-label">Priority</span>
+    <span class="task-meta-label">Priority:</span>
 
     <span
       class="priority-pill"
@@ -156,7 +156,7 @@ function renderTodos(activeTodos) {
   </div>
 
   <div class="task-meta-row">
-    <span class="task-meta-label">Status</span>
+    <span class="task-meta-label">Status:</span>
 
     <span class="badge status ${statusClass}">
       ${statusText}
@@ -164,7 +164,7 @@ function renderTodos(activeTodos) {
   </div>
 
   <div class="task-meta-row">
-    <span class="task-meta-label">Due</span>
+    <span class="task-meta-label">Due:</span>
 
     <span class="task-meta-value">
       ${formatDate(task.dueDate)}
@@ -229,7 +229,7 @@ function renderTodos(activeTodos) {
 
                 <li class="card-action delete">
                     <i class="fa-solid fa-trash"></i>
-                    <span>Delete Task</span>
+                    <span>Delete</span>
                 </li>
 
             </ul>
