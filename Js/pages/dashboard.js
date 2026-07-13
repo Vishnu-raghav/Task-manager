@@ -5,6 +5,7 @@ import {
   saveTodos,
   getCategories,
   initializePriorities,
+  initializeCategories,
   getFilterState
 } from "../services/storage.js";
 
@@ -40,6 +41,8 @@ const select = document.getElementById("task-category");
 const filterModal = document.getElementById("filterPanel");
 
 initializePriorities()
+initializeCategories()
+
 
   populateCategoryOptions(select, getCategories(), {
     placeholderText: "Select Category"
