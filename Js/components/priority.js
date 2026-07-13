@@ -6,6 +6,59 @@ const dropdown = document.getElementById("priorityDropdown");
 const selected = dropdown.querySelector(".dropdown-selected");
 
 let isAddingPriority = false
+let activePopup = null;
+
+function openPopup(item, dots) {
+
+  const popup = item.querySelector(".priority-dropdown-modal");
+  if (!popup) return;
+
+  closePriorityModals();
+
+  popup.parentTaskId = item.dataset.id;
+
+  document.body.appendChild(popup);
+
+  popup.style.position = "fixed";
+  popup.style.display = "block";
+  popup.style.zIndex = "99999";
+  popup.style.width = "180px";
+
+  const rect = dots.getBoundingClientRect();
+  const gap = 8;
+
+  if (window.innerWidth <= 768) {
+
+    let left = rect.left;
+
+    const popupWidth = popup.offsetWidth;
+
+    if (left + popupWidth > window.innerWidth - 12) {
+      left = window.innerWidth - popupWidth - 12;
+    }
+
+    if (left < 12) left = 12;
+
+    popup.style.left = `${left}px`;
+    popup.style.top = `${rect.bottom + gap}px`;
+
+  } else {
+
+    const popupWidth = popup.offsetWidth;
+
+    let left = rect.right + gap;
+
+    if (left + popupWidth > window.innerWidth) {
+      left = rect.left - popupWidth - gap;
+    }
+
+    popup.style.left = `${left}px`;
+    popup.style.top = `${rect.top}px`;
+
+  }
+
+  activePopup = popup;
+}
 
 const colors = [
   { name: "Red", color: "#ef4444" },
@@ -52,66 +105,119 @@ priorityContainer.addEventListener("click", (e) => {
     if(!success) return
 
     isAddingPriority = false;
+    // renderPriorityInputSection();
+    requestAnimationFrame(() => {
     renderPriorityInputSection();
+});
     return;
   }
 
   const cancelBtn = e.target.closest(".cancel-priority");
   if (cancelBtn) {
     isAddingPriority = false;
+    requestAnimationFrame(() => {
     renderPriorityInputSection();
+});
     return;
   }
 
   const addBtn = e.target.closest(".add-priority-btn");
   if (addBtn) {
+    console.log("clicked");
+    e.stopPropagation();
+
     isAddingPriority = true;
-    renderPriorityInputSection();
+
+    requestAnimationFrame(() => {
+        renderPriorityInputSection();
+    });
+
     return;
   }
 
-  const deleteBtn = e.target.closest(".priority-delete-btn")
-  if(deleteBtn){
-     const item = deleteBtn.closest(".dropdown-item")
-     if(!item) return
 
-     const id = Number(item.dataset.id)
-     deletePriorityHandle(id)
-     return
-  }
 
-  const dots = e.target.closest(".dots")
-  if(dots){
-    const container = dots.closest(".dropdown-item")
-    if(!container) return
+  const dots = e.target.closest(".dots");
 
-    const modal = container.querySelector(".priority-dropdown-modal")    
-    const allActiveModal = document.querySelectorAll(".priority-dropdown-modal.active");
-    const isOpen = modal.classList.contains("active");
+// if (dots) {
 
-    allActiveModal.forEach(modal => {
-      modal.classList.remove("active")
-    });
-    
-    if(isOpen){
-      return;
-    }
-    
-    modal.classList.add("active");
+//   const item = dots.closest(".dropdown-item");
+//   if (!item) return;
 
-    return
-  }
+//   const popup = item.querySelector(".priority-dropdown-modal");
+//   if (!popup) return;
 
-  const colorOption = e.target.closest(".color-option");
-  if(colorOption){
-   const color = colorOption.dataset.color
-   const item = colorOption.closest(".dropdown-item") 
-   if(!item) return
+//   if (activePopup && activePopup !== popup) {
+//     closePriorityModals();
+//   }
 
-   const id = Number(item.dataset.id)
-   priorityColor(id, color)
-   return;
-  }
+//   if (popup.style.display === "block") {
+//     closePriorityModals();
+//     return;
+//   }
+
+//   popup.parentTaskId = item.dataset.id;
+
+//   document.body.appendChild(popup);
+
+//   popup.style.position = "fixed";
+//   popup.style.display = "block";
+//   popup.style.zIndex = "99999";
+
+//   const rect = dots.getBoundingClientRect();
+//   const gap = 8;
+
+//   if (window.innerWidth <= 768) {
+
+//     popup.style.width = "180px";
+
+//     const popupWidth = popup.offsetWidth;
+
+//     let left = rect.left;
+
+//     if (left + popupWidth > window.innerWidth - 12) {
+//       left = window.innerWidth - popupWidth - 12;
+//     }
+
+//     if (left < 12) {
+//       left = 12;
+//     }
+
+//     popup.style.left = `${left}px`;
+//     popup.style.top = `${rect.bottom + gap}px`;
+
+//   } else {
+
+
+//     popup.style.width = "180px";
+
+//     const popupWidth = popup.offsetWidth;
+
+//     let left = rect.right + gap;
+
+//     if (left + popupWidth > window.innerWidth) {
+//       left = rect.left - popupWidth - gap;
+//     }
+
+//     popup.style.left = `${left}px`;
+//     popup.style.top = `${rect.top}px`;
+//   }
+
+//   activePopup = popup;
+
+//   return;
+// }
+
+if (dots) {
+
+    const item = dots.closest(".dropdown-item");
+
+    if (!item) return;
+
+    openPopup(item, dots);
+
+    return;
+}
 
   const item = e.target.closest(".dropdown-item");
   if (!item) return;
@@ -200,7 +306,7 @@ export function resetPriorityDropdown() {
 }
 
 function renderPriorityInputSection() {
-
+console.log("render");
   const addNewContainer = document.querySelector(".add-new");
 
   if (isAddingPriority) {
@@ -304,12 +410,23 @@ function deletePriorityHandle(id){
   populateCustomDropdown()
 }
 
-function closePriorityModals() {
-  document
-    .querySelectorAll(".priority-dropdown-modal.active")
-    .forEach(modal => {
-      modal.classList.remove("active");
-    });
+function closePriorityModals(){
+
+    if(!activePopup) return;
+
+    activePopup.style.display="none";
+    activePopup.style.width="";
+
+    const item=document.querySelector(
+        `.dropdown-item[data-id="${activePopup.parentTaskId}"]`
+    );
+
+    if(item){
+        item.appendChild(activePopup);
+    }
+
+    activePopup=null;
+
 }
 
 function priorityColor(id, color) {
@@ -347,6 +464,42 @@ function renderSelectedPriority(priority){
     </span>
   `;
 }
+
+
+document.addEventListener("click", (e) => {
+
+  const deleteBtn = e.target.closest(".priority-delete-btn");
+
+  if (deleteBtn) {
+    const popup = deleteBtn.closest(".priority-dropdown-modal");
+    const id = Number(popup.parentTaskId);
+    deletePriorityHandle(id);
+    closePriorityModals();
+    return;
+  }
+
+  const colorOption = e.target.closest(".color-option");
+  if (colorOption) {
+    const popup = colorOption.closest(".priority-dropdown-modal");
+    const id = Number(popup.parentTaskId);
+    priorityColor(id, colorOption.dataset.color);
+    closePriorityModals();
+    return;
+  }
+
+  if (dropdown.contains(e.target)) return
+
+  if (activePopup && activePopup.contains(e.target)) return
+
+  if (dropdown.classList.contains("active")) {
+    dropdown.classList.remove("active");
+    isAddingPriority = false;
+    renderPriorityInputSection();
+  }
+
+  closePriorityModals();
+
+});
 
 resetPriorityDropdown()
 populateCustomDropdown()
