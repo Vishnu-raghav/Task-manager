@@ -23,6 +23,7 @@ import { filterTodos } from "../components/filter.js";
 import {resetPriorityDropdown} from "../components/priority.js"
 import { clearImage } from "../utils/imageState.js";
 import  {resetImagePreview} from "../components/modal.js"
+import { setMinimumDueDate } from "../components/modal.js";
 
 
 const form = document.getElementById("todoForm");
@@ -38,15 +39,11 @@ const modalSubmitBtn = todoModal.querySelector('button[type="submit"]');
 const select = document.getElementById("task-category");
 const filterModal = document.getElementById("filterPanel");
 
-
-
 initializePriorities()
 
-if (select) {
   populateCategoryOptions(select, getCategories(), {
     placeholderText: "Select Category"
   });
-}
 
 
 function formatDate(dateString){
@@ -304,6 +301,7 @@ function updateProgressUI(todos) {
 }
 
 addTaskBtn.addEventListener("click", () => {
+  setMinimumDueDate();
   closeCardPopups();
   form.reset()
   clearEditState()

@@ -6,6 +6,7 @@ const form = document.getElementById("todoForm");
 const submitBtn = document.querySelector('button[type="submit"]');
 const todoModal = document.getElementById("todoModal");
 const closeBtns = document.querySelectorAll(".close-modal");
+const dueDateInput = document.getElementById("task-date");
 
 
 closeBtns.forEach(btn => {
@@ -71,6 +72,7 @@ function showImage(file){
     previewImg.style.display = "block";
     uploadContent.style.display = "none";
     removeImageBtn.style.display = "flex";
+    form.dispatchEvent(new Event("input", { bubbles: true }));
   };
   reader.readAsDataURL(file);
 }
@@ -86,18 +88,23 @@ export function resetImagePreview() {
 
 removeImageBtn.addEventListener("click",(e)=>{
 
-    e.stopPropagation();
-
-    clearImage();
-
-    previewImg.src="";
-
-    previewImg.style.display="none";
-
-    uploadContent.style.display="flex";
-
-    removeImageBtn.style.display="none";
-
-    fileInput.value="";
+  e.stopPropagation();
+  clearImage();
+  previewImg.src="";
+  previewImg.style.display="none";
+  uploadContent.style.display="flex";
+  removeImageBtn.style.display="none";
+  fileInput.value="";
+  form.dispatchEvent(new Event("input", { bubbles: true }));
 
 });
+
+export function setMinimumDueDate() {
+ const today = new Date();
+
+const yyyy = today.getFullYear();
+const mm = String(today.getMonth() + 1).padStart(2, "0");
+const dd = String(today.getDate()).padStart(2, "0");
+
+dueDateInput.min = `${yyyy}-${mm}-${dd}`;
+}

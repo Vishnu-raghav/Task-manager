@@ -1,5 +1,6 @@
 import { setImage } from "../utils/imageState.js";
-import { getTodos, getCategories } from "../services/storage.js";
+import { getTodos, getCategories, getPriorities } from "../services/storage.js";
+import { renderSelectedPriority } from "../utils/priorityUI.js";
 const previewImg = document.getElementById("previewImg");
 const uploadContent = document.querySelector(".upload-content");
 const dropdown = document.querySelector(".custom-dropdown");
@@ -25,6 +26,11 @@ export function openEditTask(id, {
   form.title.value = todo.title;
   form.desc.value = todo.desc;
   dropdown.dataset.value = todo.priority;
+  const priority = getPriorities().find(
+    p => p.id === Number(todo.priority)
+  );
+
+renderSelectedPriority(dropdown, priority);
   form.category.value = todo.category;
   form.dueDate.value = todo.dueDate;
 

@@ -1,6 +1,6 @@
 import {createPriority, deletePriority} from "../services/taskcrud.js"
 import { getPriorities, savePriorities } from "../services/storage.js";
-
+import { renderSelectedPriority } from "../utils/priorityUI.js";
 const priorityContainer = document.getElementById("task-priority") 
 const dropdown = document.getElementById("priorityDropdown");
 const selected = dropdown.querySelector(".dropdown-selected");
@@ -105,7 +105,6 @@ priorityContainer.addEventListener("click", (e) => {
     if(!success) return
 
     isAddingPriority = false;
-    // renderPriorityInputSection();
     requestAnimationFrame(() => {
     renderPriorityInputSection();
 });
@@ -135,105 +134,30 @@ priorityContainer.addEventListener("click", (e) => {
     return;
   }
 
-
-
   const dots = e.target.closest(".dots");
 
-// if (dots) {
-
-//   const item = dots.closest(".dropdown-item");
-//   if (!item) return;
-
-//   const popup = item.querySelector(".priority-dropdown-modal");
-//   if (!popup) return;
-
-//   if (activePopup && activePopup !== popup) {
-//     closePriorityModals();
-//   }
-
-//   if (popup.style.display === "block") {
-//     closePriorityModals();
-//     return;
-//   }
-
-//   popup.parentTaskId = item.dataset.id;
-
-//   document.body.appendChild(popup);
-
-//   popup.style.position = "fixed";
-//   popup.style.display = "block";
-//   popup.style.zIndex = "99999";
-
-//   const rect = dots.getBoundingClientRect();
-//   const gap = 8;
-
-//   if (window.innerWidth <= 768) {
-
-//     popup.style.width = "180px";
-
-//     const popupWidth = popup.offsetWidth;
-
-//     let left = rect.left;
-
-//     if (left + popupWidth > window.innerWidth - 12) {
-//       left = window.innerWidth - popupWidth - 12;
-//     }
-
-//     if (left < 12) {
-//       left = 12;
-//     }
-
-//     popup.style.left = `${left}px`;
-//     popup.style.top = `${rect.bottom + gap}px`;
-
-//   } else {
-
-
-//     popup.style.width = "180px";
-
-//     const popupWidth = popup.offsetWidth;
-
-//     let left = rect.right + gap;
-
-//     if (left + popupWidth > window.innerWidth) {
-//       left = rect.left - popupWidth - gap;
-//     }
-
-//     popup.style.left = `${left}px`;
-//     popup.style.top = `${rect.top}px`;
-//   }
-
-//   activePopup = popup;
-
-//   return;
-// }
-
 if (dots) {
-
     const item = dots.closest(".dropdown-item");
-
     if (!item) return;
-
     openPopup(item, dots);
-
     return;
 }
 
   const item = e.target.closest(".dropdown-item");
   if (!item) return;
-
   const id = item.dataset.id;
   const priority = getPriorities().find(
   p => p.id === Number(id)
   );
 
-  renderSelectedPriority(priority)
+  // renderSelectedPriority(priority)
+  renderSelectedPriority(dropdown, priority);
   
   dropdown.dataset.value = id;
+  const form = document.getElementById("todoForm");
+  form.dispatchEvent(new Event("input", { bubbles: true }));
   dropdown.classList.remove("active");
-
   closePriorityModals()
-
 });
 
 
@@ -306,7 +230,6 @@ export function resetPriorityDropdown() {
 }
 
 function renderPriorityInputSection() {
-console.log("render");
   const addNewContainer = document.querySelector(".add-new");
 
   if (isAddingPriority) {
@@ -387,7 +310,7 @@ function addNewPriorityHandle(){
 
   populateCustomDropdown();
 
-  renderSelectedPriority(createdPriority);
+  renderSelectedPriority(dropdown, createdPriority);
 
   dropdown.dataset.value = createdPriority.id;
 
@@ -445,25 +368,25 @@ function priorityColor(id, color) {
   const selectedId = Number(dropdown.dataset.value);
 
   if (selectedId === id) {
-    renderSelectedPriority(priority);
+    renderSelectedPriority(dropdown, priority);
   }
 }
 
-function renderSelectedPriority(priority){
-  if(!priority) return;
+// export function renderSelectedPriority(priority){
+//   if(!priority) return;
 
-  selected.innerHTML = `
-    <span
-      class="priority-badge"
-      style="
-        background:${priority.color || "#6b7280"};
-        color:white;
-      "
-    >
-      ${priority.name}
-    </span>
-  `;
-}
+//   selected.innerHTML = `
+//     <span
+//       class="priority-badge"
+//       style="
+//         background:${priority.color || "#6b7280"};
+//         color:white;
+//       "
+//     >
+//       ${priority.name}
+//     </span>
+//   `;
+// }
 
 
 document.addEventListener("click", (e) => {

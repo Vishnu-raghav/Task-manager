@@ -15,7 +15,7 @@ import {populateOptions as populateCategoryOptions} from "../utils/populateOptio
 import { filterTodos } from "../components/filter.js";
 import {resetPriorityDropdown} from "../components/priority.js"
 import { clearImage } from "../utils/imageState.js";
-import  {resetImagePreview} from "../components/modal.js"
+import  {resetImagePreview, setMinimumDueDate} from "../components/modal.js"
 
 const rightPanel = document.querySelector(".grid-right-area");
 const listSection = document.querySelector(".task-card-section");
@@ -30,11 +30,10 @@ const filterModal = document.getElementById("filterPanel");
 
 let activeTaskId = null;
 
-if (select) {
   populateCategoryOptions(select, getCategories(), {
     placeholderText: "Select Category"
   });
-}
+
 
 function formatDate(dateString){
 
@@ -352,6 +351,7 @@ rightPanel.addEventListener("click", (e) => {
 
 addTaskBtn.addEventListener("click", () => {
   form.reset();
+  setMinimumDueDate();
   clearEditState();
   clearImage()
   resetImagePreview()

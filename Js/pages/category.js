@@ -46,7 +46,6 @@ export function renderCategories() {
     const completed = tasks.filter(t => t.completed).length;
     const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
     const isSelected = cat.id === activeCategoryId
-    console.log(tasks)
 
     const latestTask = tasks.reduce((latest, current) => {
     if (!latest) return current;

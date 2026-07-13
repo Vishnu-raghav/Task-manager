@@ -17,13 +17,14 @@ export function isEditChanged(form) {
   const { originalTodoData, originalCatData } = getEditState();
 
   if (originalTodoData) {
-    return (
-      form.title.value.trim() !== originalTodoData.title.trim() ||
-      form.desc.value.trim() !== originalTodoData.desc.trim() ||
-      (dropdown?.dataset.value || "") !== originalTodoData.priority||
-      form.category.value.trim() !== originalTodoData.category.trim() ||
-      form.dueDate.value.trim() !== originalTodoData.dueDate.trim()
-    );
+   return (
+  form.title.value.trim() !== originalTodoData.title.trim() ||
+  form.desc.value.trim() !== originalTodoData.desc.trim() ||
+  (dropdown?.dataset.value || "") !== String(originalTodoData.priority) ||
+  form.category.value.trim() !== String(originalTodoData.category) ||
+  form.dueDate.value.trim() !== originalTodoData.dueDate.trim() ||
+  getImage() !== originalTodoData.image
+);
   }
 
   if (originalCatData) {
