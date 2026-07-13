@@ -8,11 +8,11 @@ Instead of relying on libraries, I focused on understanding how applications are
 
 ## Live Demo
 
-🔗 [https://your-live-demo-link](https://vercel.com/vishnu-raghavs-projects](https://taskflow-iota-green.vercel.app/)
+🔗 https://taskflow-iota-green.vercel.app/
 
 ## GitHub Repository
 
-🔗 [https://github.com/your-username/taskflow(https://github.com/Vishnu-raghav/TaskFlow)
+🔗 https://github.com/Vishnu-raghav/TaskFlow
 
 ---
 
@@ -202,29 +202,17 @@ Implementing everything manually in Vanilla JavaScript gave me a much deeper und
 
 ---
 
-# Installation
+# Getting Started
 
-Clone the repository
-
-```bash
-git clone https://github.com/your-username/taskflow.git
-```
-
-Go to the project folder
+### Clone the repository
 
 ```bash
-cd taskflow
+git clone https://github.com/Vishnu-raghav/TaskFlow.git
 ```
 
-Open
+Open the project in **Visual Studio Code** and launch it using the **Live Server** extension.
 
-```
-index.html
-```
-
-or run with Live Server.
-
----
+Or simply explore the project using the **Live Demo**.
 
 # Feedback
 
