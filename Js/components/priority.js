@@ -100,6 +100,7 @@ priorityContainer.addEventListener("click", (e) => {
 
   const saveBtn = e.target.closest(".priority-create");
   if (saveBtn) {
+    closePriorityModals();
     const success = addNewPriorityHandle()
 
     if(!success) return
@@ -113,6 +114,7 @@ priorityContainer.addEventListener("click", (e) => {
 
   const cancelBtn = e.target.closest(".cancel-priority");
   if (cancelBtn) {
+    closePriorityModals();
     isAddingPriority = false;
     requestAnimationFrame(() => {
     renderPriorityInputSection();
@@ -121,8 +123,9 @@ priorityContainer.addEventListener("click", (e) => {
   }
 
   const addBtn = e.target.closest(".add-priority-btn");
+
   if (addBtn) {
-    console.log("clicked");
+    closePriorityModals();
     e.stopPropagation();
 
     isAddingPriority = true;
@@ -137,8 +140,20 @@ priorityContainer.addEventListener("click", (e) => {
   const dots = e.target.closest(".dots");
 
 if (dots) {
+  e.stopPropagation();
     const item = dots.closest(".dropdown-item");
     if (!item) return;
+
+    const popup = item.querySelector(".priority-dropdown-modal");
+
+   if (
+    activePopup &&
+    activePopup.parentTaskId === item.dataset.id
+) {
+    closePriorityModals();
+    return;
+}
+
     openPopup(item, dots);
     return;
 }
@@ -150,7 +165,6 @@ if (dots) {
   p => p.id === Number(id)
   );
 
-  // renderSelectedPriority(priority)
   renderSelectedPriority(dropdown, priority);
   
   dropdown.dataset.value = id;
@@ -286,7 +300,6 @@ function renderPriorityInputSection() {
 function addNewPriorityHandle(){
 
   const container = document.querySelector(".add-new");
-
   const input = container.querySelector(".priority-input");
   const value = input.value.trim();
 
@@ -309,13 +322,9 @@ function addNewPriorityHandle(){
 }
 
   populateCustomDropdown();
-
   renderSelectedPriority(dropdown, createdPriority);
-
   dropdown.dataset.value = createdPriority.id;
-
   dropdown.classList.remove("active");
-
   return true;
 }
 
@@ -334,7 +343,6 @@ function deletePriorityHandle(id){
 }
 
 function closePriorityModals(){
-
     if(!activePopup) return;
 
     activePopup.style.display="none";
@@ -372,25 +380,7 @@ function priorityColor(id, color) {
   }
 }
 
-// export function renderSelectedPriority(priority){
-//   if(!priority) return;
-
-//   selected.innerHTML = `
-//     <span
-//       class="priority-badge"
-//       style="
-//         background:${priority.color || "#6b7280"};
-//         color:white;
-//       "
-//     >
-//       ${priority.name}
-//     </span>
-//   `;
-// }
-
-
 document.addEventListener("click", (e) => {
-
   const deleteBtn = e.target.closest(".priority-delete-btn");
 
   if (deleteBtn) {
