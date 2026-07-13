@@ -1,5 +1,6 @@
 import 
-{ getCategories, getTodos , getPriorities, getFilterState, getTaskId, clearTaskId }
+{ getCategories, getTodos , getPriorities, getFilterState, getTaskId, clearTaskId,
+  initializePriorities, initializeCategories }
 from "../services/storage.js";
 import { clearEditState, getEditState ,openEditTask } from "../features/taskActions.js";
 import {initForm,updateSubmitButtonState} from "../features/formUtils.js"
@@ -27,7 +28,8 @@ const modalSubmitBtn = todoModal.querySelector('button[type="submit"]');
 const select = document.getElementById("task-category");
 const filterModal = document.getElementById("filterPanel");
 
-
+initializePriorities()
+initializeCategories()
 let activeTaskId = null;
 
   populateCategoryOptions(select, getCategories(), {
