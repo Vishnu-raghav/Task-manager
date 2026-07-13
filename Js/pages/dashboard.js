@@ -21,7 +21,7 @@ import {
 
 import {populateOptions as populateCategoryOptions,} from "../utils/populateOptions.js"
 import { filterTodos } from "../components/filter.js";
-import {resetPriorityDropdown} from "../components/priority.js"
+import {resetPriorityDropdown, populateCustomDropdown} from "../components/priority.js"
 import { clearImage } from "../utils/imageState.js";
 import  {resetImagePreview} from "../components/modal.js"
 import { setMinimumDueDate } from "../components/modal.js";
@@ -41,6 +41,7 @@ const select = document.getElementById("task-category");
 const filterModal = document.getElementById("filterPanel");
 
 initializePriorities()
+populateCustomDropdown();
 initializeCategories()
 
 

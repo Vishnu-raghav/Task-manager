@@ -1,6 +1,5 @@
 import "./components/sidebar.js";
 
-
 rerenderPage();
 
 export function rerenderPage() {

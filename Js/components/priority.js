@@ -175,7 +175,7 @@ if (dots) {
 });
 
 
-function populateCustomDropdown(){
+export function populateCustomDropdown(){
 
     priorityContainer.innerHTML = ""
     
