@@ -123,7 +123,6 @@ priorityContainer.addEventListener("click", (e) => {
   }
 
   const addBtn = e.target.closest(".add-priority-btn");
-
   if (addBtn) {
     closePriorityModals();
     e.stopPropagation();
@@ -138,21 +137,15 @@ priorityContainer.addEventListener("click", (e) => {
   }
 
   const dots = e.target.closest(".dots");
-
-if (dots) {
+  if (dots) {
   e.stopPropagation();
     const item = dots.closest(".dropdown-item");
     if (!item) return;
 
-    const popup = item.querySelector(".priority-dropdown-modal");
-
-   if (
-    activePopup &&
-    activePopup.parentTaskId === item.dataset.id
-) {
+   if ( activePopup && activePopup.parentTaskId === item.dataset.id) {
     closePriorityModals();
     return;
-}
+  }
 
     openPopup(item, dots);
     return;
